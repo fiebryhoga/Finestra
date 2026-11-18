@@ -135,9 +135,9 @@ function DailyMetricForm({
                     <div className="grid grid-cols-2 gap-4">
                         <div className="grid gap-2">
                             <Label htmlFor="metric-rhr">
-                                RHR{' '}
+                                BHR{' '}
                                 <span className="font-normal text-muted-foreground">
-                                    (bpm)
+                                    (Basal Heart Rate · bpm)
                                 </span>
                             </Label>
                             <Input
@@ -243,7 +243,7 @@ function DailyMetricForm({
                                 />
                                 <span className={statusMeta.textClass}>
                                     {recoveryPreview.status === 'KOSONG'
-                                        ? 'Lengkapi RHR & SpO₂'
+                                        ? 'Lengkapi BHR & SpO₂'
                                         : `${recoveryPreview.score}% · ${statusMeta.label}`}
                                 </span>
                             </span>
@@ -290,7 +290,7 @@ function DailyMetricForm({
                         </div>
 
                         <p className="text-[11px] text-muted-foreground tabular-nums">
-                            Baseline RHR aktif:{' '}
+                            Baseline BHR aktif:{' '}
                             <span className="font-medium text-foreground">
                                 {baselineRhr !== null
                                     ? `${baselineRhr.toFixed(1)} bpm`

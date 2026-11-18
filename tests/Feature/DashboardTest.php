@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\RecoveryStatus;
 use App\Models\Athlete;
 use App\Models\DailyMetric;
+use App\Models\RpeSession;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -83,6 +84,26 @@ class DashboardTest extends TestCase
                 'record_date' => '2026-11-18',
             ]);
 
+            // High ACWR (> 1.50) alert for Athlete 1 (who is Optimal on recovery)
+            RpeSession::factory()->for($optimalAthlete)->create([
+                'session_date' => '2026-11-03',
+                'rpe' => 5,
+                'duration_minutes' => 100,
+                'session_load' => 500,
+            ]);
+            RpeSession::factory()->for($optimalAthlete)->create([
+                'session_date' => '2026-11-10',
+                'rpe' => 5,
+                'duration_minutes' => 100,
+                'session_load' => 500,
+            ]);
+            RpeSession::factory()->for($optimalAthlete)->create([
+                'session_date' => '2026-11-18',
+                'rpe' => 10,
+                'duration_minutes' => 300,
+                'session_load' => 3000,
+            ]);
+
             $this->actingAs($user)
                 ->get(route('dashboard'))
                 ->assertOk()
@@ -94,11 +115,11 @@ class DashboardTest extends TestCase
                     ->where('stats.optimal_fit', 1)
                     ->where('stats.fatigue_warning', 1)
                     ->where('stats.in_recovery', 1)
-                    ->has('alerts', 2)
-                    ->where('alerts.0.athlete_name', 'Atlet Lelah')
+                    ->has('alerts', 3)
                     ->where('alerts.0.severity', 'rose')
-                    ->where('alerts.1.athlete_name', 'Atlet RHR Tinggi')
-                    ->where('alerts.1.severity', 'amber')
+                    ->where('alerts.1.severity', 'rose')
+                    ->where('alerts.2.athlete_name', 'Atlet RHR Tinggi')
+                    ->where('alerts.2.severity', 'amber')
                     ->has('recentMetrics', 3),
                 );
         } finally {

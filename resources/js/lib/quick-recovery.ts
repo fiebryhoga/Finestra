@@ -216,25 +216,25 @@ export function computeClinicalInsightsForPeriod(
     const rhrInsight: ClinicalInsight =
         avgRhrDiff <= 2.0
             ? {
-                  category: 'Analisis Klinis RHR',
+                  category: 'Analisis Klinis BHR',
                   level: 'optimal',
-                  title: 'RHR Stabil terhadap Baseline',
-                  summary: `Rata-rata RHR (${avgRhr} bpm) konsisten dengan baseline (${effectiveBaseline} bpm), menandakan respons otonom terkendali.`,
+                  title: 'BHR Stabil terhadap Baseline',
+                  summary: `Rata-rata BHR (${avgRhr} bpm) konsisten dengan baseline (${effectiveBaseline} bpm), menandakan respons otonom terkendali.`,
                   value: `${diffSign}${avgRhrDiff} bpm`,
               }
             : avgRhrDiff <= 5.0
               ? {
-                    category: 'Analisis Klinis RHR',
+                    category: 'Analisis Klinis BHR',
                     level: 'warning',
-                    title: 'Peningkatan RHR Moderat (Elevated RHR)',
-                    summary: `Rata-rata RHR meningkat ${diffSign}${avgRhrDiff} bpm di atas baseline (${effectiveBaseline} bpm). Pantau tanda kelelahan kardiovaskular.`,
+                    title: 'Peningkatan BHR Moderat (Elevated BHR)',
+                    summary: `Rata-rata BHR meningkat ${diffSign}${avgRhrDiff} bpm di atas baseline (${effectiveBaseline} bpm). Pantau tanda kelelahan kardiovaskular.`,
                     value: `${diffSign}${avgRhrDiff} bpm`,
                 }
               : {
-                    category: 'Analisis Klinis RHR',
+                    category: 'Analisis Klinis BHR',
                     level: 'risk',
-                    title: 'Lonjakan RHR Signifikan (RHR Spike)',
-                    summary: `Lonjakan RHR ${diffSign}${avgRhrDiff} bpm dari baseline (${effectiveBaseline} bpm) merupakan indikator awal overtraining atau kurang istirahat.`,
+                    title: 'Lonjakan BHR Signifikan (BHR Spike)',
+                    summary: `Lonjakan BHR ${diffSign}${avgRhrDiff} bpm dari baseline (${effectiveBaseline} bpm) merupakan indikator awal overtraining atau kurang istirahat.`,
                     value: `${diffSign}${avgRhrDiff} bpm`,
                 };
 

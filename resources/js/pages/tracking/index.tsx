@@ -129,8 +129,9 @@ export default function TrackingIndex({ athletes, filters, stats }: Props) {
                             Tracking Quick Recovery
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Pantau kesiapan pemulihan harian (QRS), Resting HR,
-                            SpO₂, VO₂ Max, dan Peak Power seluruh atlet.
+                            Pantau kesiapan pemulihan harian (QRS), Basal Heart
+                            Rate (BHR), SpO₂, VO₂ Max, dan Peak Power seluruh
+                            atlet.
                         </p>
                     </div>
 
@@ -292,7 +293,7 @@ export default function TrackingIndex({ athletes, filters, stats }: Props) {
                                             </TableHead>
                                             <TableHead>Mulai Program</TableHead>
                                             <TableHead className="text-right">
-                                                RHR Terakhir
+                                                BHR Terakhir
                                             </TableHead>
                                             <TableHead className="text-right">
                                                 SpO₂

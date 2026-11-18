@@ -37,7 +37,7 @@ class StoreBulkDailyMetricRequest extends FormRequest
             'rows.min' => 'Minimal satu baris data wajib diisi.',
             'rows.*.record_date.required' => 'Tanggal pada setiap baris wajib diisi.',
             'rows.*.record_date.distinct' => 'Terdapat tanggal pencatatan yang duplikat.',
-            'rows.*.rhr.max' => 'RHR maksimal 220 bpm.',
+            'rows.*.rhr.max' => 'BHR maksimal 220 bpm.',
             'rows.*.spo2.max' => 'SpO₂ maksimal 100%.',
             'rows.*.vj.max' => 'Vertical Jump maksimal 150 cm.',
             'rows.*.weight.max' => 'Berat badan maksimal 250 kg.',

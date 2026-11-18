@@ -4,9 +4,12 @@ import {
     AlertTriangle,
     ArrowRight,
     CheckCircle2,
+    Flame,
     HeartPulse,
     Users,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { Button } from '@/components/ui/button';
 import {
     Table,
@@ -20,6 +23,7 @@ import { getRecoveryStatusMeta } from '@/lib/quick-recovery';
 import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { index as athletesIndex } from '@/routes/athletes';
+import { index as rpeIndex, show as rpeShow } from '@/routes/rpe';
 import {
     index as trackingIndex,
     show as trackingShow,
@@ -40,12 +44,38 @@ type PageProps = {
 
 export default function Dashboard() {
     const { auth, stats, alerts, recentMetrics } = usePage<PageProps>().props;
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const trackedBase = Math.max(stats.tracked_athletes, 1);
     const optimalPct = Math.round((stats.optimal_fit / trackedBase) * 100);
     const warningPct = Math.round((stats.fatigue_warning / trackedBase) * 100);
     const recoveryPct = Math.round((stats.in_recovery / trackedBase) * 100);
     const attentionCount = stats.fatigue_warning + stats.in_recovery;
+
+    const squadDonutData =
+        stats.tracked_athletes > 0
+            ? [
+                  {
+                      name: 'Optimal Fit',
+                      value: stats.optimal_fit,
+                      color: '#10b981',
+                  },
+                  {
+                      name: 'Fatigue Warning',
+                      value: stats.fatigue_warning,
+                      color: '#f59e0b',
+                  },
+                  {
+                      name: 'In Recovery',
+                      value: stats.in_recovery,
+                      color: '#f43f5e',
+                  },
+              ].filter((segment) => segment.value > 0)
+            : [{ name: 'Belum Ada Data', value: 1, color: 'var(--muted)' }];
 
     return (
         <>
@@ -72,6 +102,16 @@ export default function Dashboard() {
                             <Link href={athletesIndex()}>
                                 <Users className="size-4" />
                                 Data Atlet
+                            </Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant="outline"
+                            className="rounded-md"
+                        >
+                            <Link href={rpeIndex()}>
+                                <Flame className="size-4" />
+                                RPE &amp; ACWR
                             </Link>
                         </Button>
                         <Button asChild className="rounded-md">
@@ -156,76 +196,155 @@ export default function Dashboard() {
                             </p>
                         </div>
 
-                        <div className="mt-5 space-y-4">
-                            <div className="space-y-1.5">
-                                <div className="flex items-center justify-between text-xs">
-                                    <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
-                                        <span className="size-1.5 rounded-full bg-emerald-500" />
-                                        Optimal Fit (≥ 75%)
-                                    </span>
-                                    <span className="text-muted-foreground tabular-nums">
-                                        {stats.optimal_fit} atlet (
-                                        {stats.tracked_athletes > 0
-                                            ? optimalPct
-                                            : 0}
-                                        %)
-                                    </span>
-                                </div>
-                                <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
-                                    <div
-                                        className="h-full rounded-md bg-emerald-500 transition-all"
-                                        style={{
-                                            width: `${stats.tracked_athletes > 0 ? optimalPct : 0}%`,
-                                        }}
-                                    />
-                                </div>
+                        <div className="mt-4 flex flex-col items-center gap-5 sm:flex-row">
+                            <div className="relative flex size-40 shrink-0 items-center justify-center">
+                                {!isMounted ? (
+                                    <div className="size-32 rounded-full border-8 border-muted" />
+                                ) : (
+                                    <>
+                                        <ResponsiveContainer
+                                            width="100%"
+                                            height="100%"
+                                        >
+                                            <PieChart>
+                                                <Pie
+                                                    data={squadDonutData}
+                                                    dataKey="value"
+                                                    nameKey="name"
+                                                    cx="50%"
+                                                    cy="50%"
+                                                    startAngle={90}
+                                                    endAngle={-270}
+                                                    innerRadius="66%"
+                                                    outerRadius="92%"
+                                                    stroke="none"
+                                                    paddingAngle={
+                                                        squadDonutData.length >
+                                                        1
+                                                            ? 2
+                                                            : 0
+                                                    }
+                                                    isAnimationActive={false}
+                                                >
+                                                    {squadDonutData.map(
+                                                        (entry) => (
+                                                            <Cell
+                                                                key={entry.name}
+                                                                fill={
+                                                                    entry.color
+                                                                }
+                                                            />
+                                                        ),
+                                                    )}
+                                                </Pie>
+                                                <Tooltip
+                                                    contentStyle={{
+                                                        backgroundColor:
+                                                            'var(--popover)',
+                                                        border: '1px solid var(--border)',
+                                                        borderRadius:
+                                                            '0.375rem',
+                                                        color: 'var(--popover-foreground)',
+                                                        fontSize: '12px',
+                                                    }}
+                                                    formatter={(
+                                                        value,
+                                                        name,
+                                                    ) => [
+                                                        stats.tracked_athletes >
+                                                        0
+                                                            ? `${String(value ?? 0)} atlet`
+                                                            : '0 atlet',
+                                                        String(name ?? ''),
+                                                    ]}
+                                                />
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                                            <span className="text-xl font-semibold tracking-tight text-foreground tabular-nums">
+                                                {stats.avg_readiness_7d !== null
+                                                    ? `${stats.avg_readiness_7d.toFixed(1)}%`
+                                                    : '—'}
+                                            </span>
+                                            <span className="text-[11px] text-muted-foreground">
+                                                Avg 7 Hari
+                                            </span>
+                                        </div>
+                                    </>
+                                )}
                             </div>
 
-                            <div className="space-y-1.5">
-                                <div className="flex items-center justify-between text-xs">
-                                    <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
-                                        <span className="size-1.5 rounded-full bg-amber-500" />
-                                        Fatigue Warning (50–74%)
-                                    </span>
-                                    <span className="text-muted-foreground tabular-nums">
-                                        {stats.fatigue_warning} atlet (
-                                        {stats.tracked_athletes > 0
-                                            ? warningPct
-                                            : 0}
-                                        %)
-                                    </span>
+                            <div className="w-full flex-1 space-y-3.5">
+                                <div className="space-y-1.5">
+                                    <div className="flex items-center justify-between text-xs">
+                                        <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                                            <span className="size-1.5 rounded-full bg-emerald-500" />
+                                            Optimal Fit (≥ 75%)
+                                        </span>
+                                        <span className="text-muted-foreground tabular-nums">
+                                            {stats.optimal_fit} atlet (
+                                            {stats.tracked_athletes > 0
+                                                ? optimalPct
+                                                : 0}
+                                            %)
+                                        </span>
+                                    </div>
+                                    <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
+                                        <div
+                                            className="h-full rounded-md bg-emerald-500 transition-all"
+                                            style={{
+                                                width: `${stats.tracked_athletes > 0 ? optimalPct : 0}%`,
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
-                                    <div
-                                        className="h-full rounded-md bg-amber-500 transition-all"
-                                        style={{
-                                            width: `${stats.tracked_athletes > 0 ? warningPct : 0}%`,
-                                        }}
-                                    />
-                                </div>
-                            </div>
 
-                            <div className="space-y-1.5">
-                                <div className="flex items-center justify-between text-xs">
-                                    <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
-                                        <span className="size-1.5 rounded-full bg-rose-500" />
-                                        In Recovery (&lt; 50%)
-                                    </span>
-                                    <span className="text-muted-foreground tabular-nums">
-                                        {stats.in_recovery} atlet (
-                                        {stats.tracked_athletes > 0
-                                            ? recoveryPct
-                                            : 0}
-                                        %)
-                                    </span>
+                                <div className="space-y-1.5">
+                                    <div className="flex items-center justify-between text-xs">
+                                        <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                                            <span className="size-1.5 rounded-full bg-amber-500" />
+                                            Fatigue Warning (50–74%)
+                                        </span>
+                                        <span className="text-muted-foreground tabular-nums">
+                                            {stats.fatigue_warning} atlet (
+                                            {stats.tracked_athletes > 0
+                                                ? warningPct
+                                                : 0}
+                                            %)
+                                        </span>
+                                    </div>
+                                    <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
+                                        <div
+                                            className="h-full rounded-md bg-amber-500 transition-all"
+                                            style={{
+                                                width: `${stats.tracked_athletes > 0 ? warningPct : 0}%`,
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
-                                    <div
-                                        className="h-full rounded-md bg-rose-500 transition-all"
-                                        style={{
-                                            width: `${stats.tracked_athletes > 0 ? recoveryPct : 0}%`,
-                                        }}
-                                    />
+
+                                <div className="space-y-1.5">
+                                    <div className="flex items-center justify-between text-xs">
+                                        <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                                            <span className="size-1.5 rounded-full bg-rose-500" />
+                                            In Recovery (&lt; 50%)
+                                        </span>
+                                        <span className="text-muted-foreground tabular-nums">
+                                            {stats.in_recovery} atlet (
+                                            {stats.tracked_athletes > 0
+                                                ? recoveryPct
+                                                : 0}
+                                            %)
+                                        </span>
+                                    </div>
+                                    <div className="h-2 w-full overflow-hidden rounded-md bg-muted">
+                                        <div
+                                            className="h-full rounded-md bg-rose-500 transition-all"
+                                            style={{
+                                                width: `${stats.tracked_athletes > 0 ? recoveryPct : 0}%`,
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -238,8 +357,8 @@ export default function Dashboard() {
                                     Alert Kesiapan &amp; Kelelahan
                                 </h2>
                                 <p className="text-xs text-muted-foreground">
-                                    Atlet dengan skor QRS &lt; 70% atau RHR &gt;
-                                    85 bpm
+                                    Atlet dengan skor QRS &lt; 70%, BHR &gt; 85
+                                    bpm, atau ACWR &gt; 1.50
                                 </p>
                             </div>
                             <Link
@@ -266,13 +385,18 @@ export default function Dashboard() {
                             <div className="mt-4 divide-y divide-border rounded-md border border-border">
                                 {alerts.map((alert) => {
                                     const isRose = alert.severity === 'rose';
+                                    const isAcwr = alert.source === 'acwr';
 
                                     return (
                                         <Link
-                                            key={alert.athlete_id}
-                                            href={trackingShow(
-                                                alert.athlete_id,
-                                            )}
+                                            key={`${alert.source}-${alert.athlete_id}`}
+                                            href={
+                                                isAcwr
+                                                    ? rpeShow(alert.athlete_id)
+                                                    : trackingShow(
+                                                          alert.athlete_id,
+                                                      )
+                                            }
                                             className="flex items-center justify-between gap-3 px-3.5 py-2.5 transition-colors hover:bg-muted/40"
                                         >
                                             <div className="min-w-0">
@@ -298,20 +422,40 @@ export default function Dashboard() {
                                             </div>
 
                                             <div className="shrink-0 text-right tabular-nums">
-                                                <p
-                                                    className={cn(
-                                                        'text-sm font-semibold',
-                                                        isRose
-                                                            ? 'text-rose-700 dark:text-rose-400'
-                                                            : 'text-amber-700 dark:text-amber-400',
-                                                    )}
-                                                >
-                                                    QRS {alert.score}%
-                                                </p>
-                                                <p className="text-[11px] text-muted-foreground">
-                                                    RHR {alert.rhr.toFixed(1)}{' '}
-                                                    bpm
-                                                </p>
+                                                {isAcwr &&
+                                                alert.acwr !== null ? (
+                                                    <>
+                                                        <p className="text-sm font-semibold text-rose-700 dark:text-rose-400">
+                                                            ACWR{' '}
+                                                            {alert.acwr.toFixed(
+                                                                2,
+                                                            )}
+                                                        </p>
+                                                        <p className="text-[11px] text-muted-foreground">
+                                                            Risiko Tinggi
+                                                        </p>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <p
+                                                            className={cn(
+                                                                'text-sm font-semibold',
+                                                                isRose
+                                                                    ? 'text-rose-700 dark:text-rose-400'
+                                                                    : 'text-amber-700 dark:text-amber-400',
+                                                            )}
+                                                        >
+                                                            QRS {alert.score}%
+                                                        </p>
+                                                        <p className="text-[11px] text-muted-foreground">
+                                                            BHR{' '}
+                                                            {alert.rhr.toFixed(
+                                                                1,
+                                                            )}{' '}
+                                                            bpm
+                                                        </p>
+                                                    </>
+                                                )}
                                             </div>
                                         </Link>
                                     );
@@ -365,7 +509,7 @@ export default function Dashboard() {
                                         <TableHead>Tanggal</TableHead>
                                         <TableHead>Program</TableHead>
                                         <TableHead className="text-right">
-                                            RHR
+                                            BHR
                                         </TableHead>
                                         <TableHead className="text-right">
                                             SpO₂

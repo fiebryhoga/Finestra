@@ -110,10 +110,12 @@ export type DashboardStats = {
 export type DashboardAlert = {
     athlete_id: number;
     athlete_name: string;
+    source: 'recovery' | 'acwr';
     severity: 'rose' | 'amber';
     reason: string;
     score: number;
     rhr: number;
+    acwr: number | null;
     record_date_formatted: string;
 };
 

@@ -13,7 +13,7 @@ import type {
     DailyMetricRecord,
 } from '@/types';
 
-type PeriodMode = 'all' | 'daily' | 'weekly' | 'monthly';
+type PeriodMode = 'all' | 'daily' | 'monthly';
 
 type Props = {
     metrics: DailyMetricRecord[];
@@ -82,14 +82,6 @@ export function AnalyticsTab({
             );
         }
 
-        if (period === 'weekly') {
-            const start = addDaysToIsoDate(referenceDate, -27);
-
-            return filledMetrics.filter(
-                (m) => m.record_date >= start && m.record_date <= referenceDate,
-            );
-        }
-
         // monthly: filter same YYYY-MM as referenceDate
         const monthPrefix = referenceDate.slice(0, 7);
 
@@ -147,7 +139,6 @@ export function AnalyticsTab({
     const periodOptions: { value: PeriodMode; label: string }[] = [
         { value: 'all', label: 'Semua' },
         { value: 'daily', label: '7 Hari' },
-        { value: 'weekly', label: '4 Minggu' },
         { value: 'monthly', label: 'Bulanan' },
     ];
 
@@ -214,7 +205,7 @@ export function AnalyticsTab({
 
                 <div className="rounded-md border border-border bg-card p-4">
                     <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-                        <span>Avg RHR</span>
+                        <span>Avg BHR</span>
                         <Activity className="size-4 text-primary" />
                     </div>
                     <p className="mt-2 text-2xl font-semibold tracking-tight text-foreground tabular-nums">
@@ -283,7 +274,7 @@ export function AnalyticsTab({
                         Automated Clinical Insights
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                        Evaluasi otomatis berdasarkan skor QRS, deviasi RHR
+                        Evaluasi otomatis berdasarkan skor QRS, deviasi BHR
                         terhadap baseline, dan kapasitas VO₂ Max
                     </p>
                 </div>

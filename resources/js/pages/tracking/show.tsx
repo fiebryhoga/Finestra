@@ -4,6 +4,7 @@ import {
     BarChart3,
     Calendar,
     Download,
+    Flame,
     Pencil,
     Plus,
     TableProperties,
@@ -38,6 +39,7 @@ import {
 } from '@/components/ui/table';
 import { getRecoveryStatusMeta } from '@/lib/quick-recovery';
 import { cn } from '@/lib/utils';
+import { show as rpeShow } from '@/routes/rpe';
 import {
     bulk as trackingBulk,
     exportPdf as trackingExportPdf,
@@ -121,7 +123,7 @@ export default function TrackingShow({
                                 {athlete.gender_label} · {athlete.age} thn ·{' '}
                                 {athlete.weight_kg.toFixed(1)} kg ·{' '}
                                 {athlete.height_cm.toFixed(1)} cm · IMT{' '}
-                                {athlete.bmi.toFixed(1)} · Baseline RHR:{' '}
+                                {athlete.bmi.toFixed(1)} · Baseline BHR:{' '}
                                 <span className="font-medium text-foreground">
                                     {baselineRhr !== null
                                         ? `${baselineRhr.toFixed(1)} bpm`
@@ -148,6 +150,17 @@ export default function TrackingShow({
                                 <Link href={trackingBulk(athlete.id)}>
                                     <TableProperties className="size-4" />
                                     Input Massal
+                                </Link>
+                            </Button>
+
+                            <Button
+                                asChild
+                                variant="outline"
+                                className="rounded-md"
+                            >
+                                <Link href={rpeShow(athlete.id)}>
+                                    <Flame className="size-4" />
+                                    RPE &amp; ACWR
                                 </Link>
                             </Button>
 
@@ -184,7 +197,7 @@ export default function TrackingShow({
                                             Week X, Day Y
                                         </span>
                                         , auto-generate baris harian, dan
-                                        prioritas Baseline RHR hari ke-1.
+                                        prioritas Baseline BHR hari ke-1.
                                     </p>
                                     <InputError
                                         message={errors.training_start_date}
@@ -288,7 +301,7 @@ export default function TrackingShow({
                                             </TableHead>
                                             <TableHead>Program</TableHead>
                                             <TableHead className="text-right">
-                                                RHR
+                                                BHR
                                             </TableHead>
                                             <TableHead className="text-right">
                                                 SpO₂
@@ -614,7 +627,7 @@ export default function TrackingShow({
                                 Sertakan Automated Clinical Insights
                             </Label>
                             <p className="text-xs text-muted-foreground">
-                                Menambahkan ringkasan evaluasi QRS, deviasi RHR,
+                                Menambahkan ringkasan evaluasi QRS, deviasi BHR,
                                 dan kategori VO₂ Max di halaman laporan.
                             </p>
                         </div>

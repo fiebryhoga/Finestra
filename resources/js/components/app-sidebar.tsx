@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Activity, HeartPulse, LayoutGrid, Users } from 'lucide-react';
+import { Activity, Flame, HeartPulse, LayoutGrid, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { index as athletesIndex } from '@/routes/athletes';
+import { index as rpeIndex } from '@/routes/rpe';
 import { index as trackingIndex } from '@/routes/tracking';
 import { index as usersIndex } from '@/routes/users';
 import type { NavItem } from '@/types';
@@ -28,6 +29,11 @@ const mainNavItems: NavItem[] = [
         title: 'Tracking',
         href: trackingIndex(),
         icon: HeartPulse,
+    },
+    {
+        title: 'Beban Latihan (RPE)',
+        href: rpeIndex(),
+        icon: Flame,
     },
     {
         title: 'Manajemen Atlet',

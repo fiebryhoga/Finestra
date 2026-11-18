@@ -2,21 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AcwrZone;
 use App\Enums\RecoveryStatus;
 use App\Models\Athlete;
 use App\Models\DailyMetric;
+use App\Services\Rpe\AcwrCalculator;
 use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        private readonly AcwrCalculator $acwrCalculator,
+    ) {}
+
     /**
      * Display the Finestra sports science monitoring dashboard.
      */
     public function __invoke(): Response
     {
-        $athletes = Athlete::query()->with('latestFilledMetric')->get();
+        $athletes = Athlete::query()
+            ->with([
+                'latestFilledMetric',
+                'rpeSessions' => fn ($query) => $query->orderBy('session_date'),
+            ])
+            ->get();
         $totalAthletes = $athletes->count();
 
         $sevenDaysAgo = Carbon::today()->subDays(6)->toDateString();
@@ -38,40 +49,61 @@ class DashboardController extends Controller
         foreach ($athletes as $athlete) {
             $latest = $athlete->latestFilledMetric;
 
-            if ($latest === null) {
-                continue;
+            if ($latest !== null) {
+                $score = $latest->quick_recovery_score;
+
+                if ($score >= 75) {
+                    $optimalFit++;
+                } elseif ($score >= 50) {
+                    $fatigueWarning++;
+                } else {
+                    $inRecovery++;
+                }
+
+                if ($latest->recovery_status === RecoveryStatus::Poor || ($score > 0 && $score < 70)) {
+                    $alerts[] = [
+                        'athlete_id' => $athlete->id,
+                        'athlete_name' => $athlete->name,
+                        'source' => 'recovery',
+                        'severity' => 'rose',
+                        'reason' => 'Kesiapan Pemulihan Rendah',
+                        'score' => $score,
+                        'rhr' => $latest->rhr,
+                        'acwr' => null,
+                        'record_date_formatted' => $latest->record_date->format('d M Y'),
+                    ];
+                } elseif ($latest->rhr > 85) {
+                    $alerts[] = [
+                        'athlete_id' => $athlete->id,
+                        'athlete_name' => $athlete->name,
+                        'source' => 'recovery',
+                        'severity' => 'amber',
+                        'reason' => 'Basal Heart Rate (BHR) Tinggi (Indikasi Letih)',
+                        'score' => $score,
+                        'rhr' => $latest->rhr,
+                        'acwr' => null,
+                        'record_date_formatted' => $latest->record_date->format('d M Y'),
+                    ];
+                }
             }
 
-            $score = $latest->quick_recovery_score;
+            if ($athlete->rpeSessions->isNotEmpty()) {
+                $weeklySummaries = $this->acwrCalculator->buildWeeklySummaries($athlete->rpeSessions);
+                $latestWeek = $weeklySummaries !== [] ? $weeklySummaries[count($weeklySummaries) - 1] : null;
 
-            if ($score >= 75) {
-                $optimalFit++;
-            } elseif ($score >= 50) {
-                $fatigueWarning++;
-            } else {
-                $inRecovery++;
-            }
-
-            if ($latest->recovery_status === RecoveryStatus::Poor || ($score > 0 && $score < 70)) {
-                $alerts[] = [
-                    'athlete_id' => $athlete->id,
-                    'athlete_name' => $athlete->name,
-                    'severity' => 'rose',
-                    'reason' => 'Kesiapan Pemulihan Rendah',
-                    'score' => $score,
-                    'rhr' => $latest->rhr,
-                    'record_date_formatted' => $latest->record_date->format('d M Y'),
-                ];
-            } elseif ($latest->rhr > 85) {
-                $alerts[] = [
-                    'athlete_id' => $athlete->id,
-                    'athlete_name' => $athlete->name,
-                    'severity' => 'amber',
-                    'reason' => 'Resting HR Tinggi (Indikasi Letih)',
-                    'score' => $score,
-                    'rhr' => $latest->rhr,
-                    'record_date_formatted' => $latest->record_date->format('d M Y'),
-                ];
+                if ($latestWeek !== null && $latestWeek['zone'] === AcwrZone::HighRisk->value) {
+                    $alerts[] = [
+                        'athlete_id' => $athlete->id,
+                        'athlete_name' => $athlete->name,
+                        'source' => 'acwr',
+                        'severity' => 'rose',
+                        'reason' => 'ACWR Zona Risiko Tinggi (> 1.50)',
+                        'score' => $latest !== null ? $latest->quick_recovery_score : 0,
+                        'rhr' => $latest !== null ? $latest->rhr : 0.0,
+                        'acwr' => $latestWeek['acwr'],
+                        'record_date_formatted' => $latestWeek['week_label'],
+                    ];
+                }
             }
         }
 

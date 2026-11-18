@@ -186,7 +186,7 @@ export default function TrackingBulkInput({
                                 Input Massal — {athlete.name}
                             </h1>
                             <p className="text-sm text-muted-foreground tabular-nums">
-                                Baseline RHR saat ini:{' '}
+                                Baseline BHR saat ini:{' '}
                                 <span className="font-medium text-foreground">
                                     {baselineRhr !== null
                                         ? `${baselineRhr.toFixed(1)} bpm`
@@ -234,9 +234,9 @@ export default function TrackingBulkInput({
                         <p>
                             Salin beberapa baris &amp; kolom dengan urutan{' '}
                             <span className="font-medium text-foreground">
-                                RHR → SpO₂ → VJ → Berat → Usia
+                                BHR → SpO₂ → VJ → Berat → Usia
                             </span>
-                            , lalu tempel (`Ctrl+V` / `⌘V`) pada sel kolom RHR.
+                            , lalu tempel (`Ctrl+V` / `⌘V`) pada sel kolom BHR.
                             Baris baru akan ditambahkan otomatis bila melebihi
                             jumlah baris saat ini.
                         </p>
@@ -266,7 +266,7 @@ export default function TrackingBulkInput({
                                         Tanggal
                                     </TableHead>
                                     <TableHead className="min-w-28 text-right">
-                                        RHR (bpm)
+                                        BHR (bpm)
                                     </TableHead>
                                     <TableHead className="min-w-28 text-right">
                                         SpO₂ (%)

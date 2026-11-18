@@ -3,6 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
     Activity,
     CornerDownLeft,
+    Flame,
     HeartPulse,
     KeyRound,
     LayoutGrid,
@@ -28,6 +29,7 @@ import { dashboard } from '@/routes';
 import { edit as editAppearance } from '@/routes/appearance';
 import { index as athletesIndex } from '@/routes/athletes';
 import { edit as editProfile } from '@/routes/profile';
+import { index as rpeIndex, teamInput as rpeTeamInput } from '@/routes/rpe';
 import { edit as editSecurity } from '@/routes/security';
 import { index as trackingIndex } from '@/routes/tracking';
 import { index as usersIndex } from '@/routes/users';
@@ -71,11 +73,13 @@ export function GlobalSearch() {
                 group: 'Navigasi',
                 title: 'Tracking Quick Recovery',
                 description:
-                    'Pantau pemulihan harian (QRS), RHR, SpO₂, VJ, VO₂ Max, dan Peak Power',
+                    'Pantau pemulihan harian (QRS), BHR, SpO₂, VJ, VO₂ Max, dan Peak Power',
                 keywords: [
                     'tracking',
                     'recovery',
                     'qrs',
+                    'bhr',
+                    'basal heart rate',
                     'rhr',
                     'spo2',
                     'vj',
@@ -86,6 +90,36 @@ export function GlobalSearch() {
                 ],
                 icon: HeartPulse,
                 onSelect: () => router.visit(trackingIndex()),
+            },
+            {
+                id: 'nav-rpe',
+                group: 'Navigasi',
+                title: 'Beban Latihan (RPE & ACWR)',
+                description:
+                    'Pantau sRPE (Foster CR-10), beban mingguan, dan ACWR Weekly',
+                keywords: [
+                    'rpe',
+                    'srpe',
+                    'acwr',
+                    'beban',
+                    'load',
+                    'foster',
+                    'monotony',
+                    'strain',
+                    'mingguan',
+                ],
+                icon: Flame,
+                onSelect: () => router.visit(rpeIndex()),
+            },
+            {
+                id: 'action-rpe-team',
+                group: 'Aksi Cepat',
+                title: 'Input Sesi Tim (RPE Massal)',
+                description:
+                    'Catat skor sRPE satu sesi latihan untuk banyak atlet sekaligus',
+                keywords: ['rpe', 'tim', 'massal', 'bulk', 'sesi', 'latihan'],
+                icon: Flame,
+                onSelect: () => router.visit(rpeTeamInput()),
             },
             {
                 id: 'nav-athletes',

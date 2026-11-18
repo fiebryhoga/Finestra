@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RpeController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
@@ -34,6 +35,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('tracking/{athlete}/start-date', [TrackingController::class, 'setStartDate'])->name('tracking.start-date');
     Route::delete('tracking/{athlete}/metrics/{dailyMetric}', [TrackingController::class, 'destroy'])->name('tracking.metrics.destroy');
     Route::get('tracking/{athlete}/export-pdf', [TrackingController::class, 'exportPdf'])->name('tracking.export-pdf');
+
+    Route::get('rpe', [RpeController::class, 'index'])->name('rpe.index');
+    Route::get('rpe/team-input', [RpeController::class, 'teamInput'])->name('rpe.team-input');
+    Route::post('rpe/team-input', [RpeController::class, 'storeTeam'])->name('rpe.team-input.store');
+    Route::get('rpe/{athlete}', [RpeController::class, 'show'])->name('rpe.show');
+    Route::post('rpe/{athlete}/sessions', [RpeController::class, 'store'])->name('rpe.sessions.store');
+    Route::patch('rpe/{athlete}/sessions/{rpeSession}', [RpeController::class, 'update'])->name('rpe.sessions.update');
+    Route::delete('rpe/{athlete}/sessions/{rpeSession}', [RpeController::class, 'destroy'])->name('rpe.sessions.destroy');
+    Route::get('rpe/{athlete}/export-pdf', [RpeController::class, 'exportPdf'])->name('rpe.export-pdf');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::post('users', [UserController::class, 'store'])->name('users.store');

@@ -70,6 +70,16 @@ class Athlete extends Model
     }
 
     /**
+     * Session RPE / internal training load logs for this athlete.
+     *
+     * @return HasMany<RpeSession, $this>
+     */
+    public function rpeSessions(): HasMany
+    {
+        return $this->hasMany(RpeSession::class);
+    }
+
+    /**
      * Calculate the athlete's current age in years.
      */
     public function age(): int

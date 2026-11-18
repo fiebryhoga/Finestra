@@ -13,6 +13,7 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
+import { RecoveryDonutChart } from '@/components/tracking/recovery-donut-chart';
 import type { DailyMetricRecord } from '@/types';
 
 type Props = {
@@ -78,139 +79,146 @@ export function AnalyticsCharts({ metrics, baselineRhr }: Props) {
 
     return (
         <div className="space-y-4">
-            {/* 1. Quick Recovery Score Trend */}
-            <div className="rounded-md border border-border bg-card p-4">
-                <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                        <h3 className="text-sm font-semibold text-foreground">
-                            Tren Quick Recovery Score (QRS)
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                            Skala 0–100% dengan ambang zona optimal (75%) dan
-                            batas pemulihan rendah (35%)
-                        </p>
-                    </div>
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1.5">
-                            <span className="size-1.5 rounded-full bg-emerald-500" />
-                            Optimal ≥ 75%
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                            <span className="size-1.5 rounded-full bg-rose-500" />
-                            Kurang &lt; 35%
-                        </span>
-                    </div>
+            {/* 1. Recovery Donut Chart + Quick Recovery Score Trend */}
+            <div className="grid gap-4 lg:grid-cols-12">
+                <div className="lg:col-span-4">
+                    <RecoveryDonutChart metrics={metrics} />
                 </div>
 
-                {!isMounted ? (
-                    <ChartSkeleton />
-                ) : (
-                    <div className="h-64 w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart
-                                data={chartData}
-                                margin={{
-                                    top: 8,
-                                    right: 16,
-                                    left: 0,
-                                    bottom: 0,
-                                }}
-                            >
-                                <defs>
-                                    <linearGradient
-                                        id="finestraQrsFill"
-                                        x1="0"
-                                        y1="0"
-                                        x2="0"
-                                        y2="1"
-                                    >
-                                        <stop
-                                            offset="5%"
-                                            stopColor="var(--chart-1)"
-                                            stopOpacity={0.28}
-                                        />
-                                        <stop
-                                            offset="95%"
-                                            stopColor="var(--chart-1)"
-                                            stopOpacity={0.02}
-                                        />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid
-                                    strokeDasharray="3 3"
-                                    stroke="var(--border)"
-                                    vertical={false}
-                                />
-                                <XAxis
-                                    dataKey="label"
-                                    tick={{
-                                        fill: 'var(--muted-foreground)',
-                                        fontSize: 11,
-                                    }}
-                                    tickLine={false}
-                                    axisLine={{ stroke: 'var(--border)' }}
-                                />
-                                <YAxis
-                                    domain={[0, 100]}
-                                    tick={{
-                                        fill: 'var(--muted-foreground)',
-                                        fontSize: 11,
-                                    }}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    unit="%"
-                                    width={42}
-                                />
-                                <Tooltip
-                                    contentStyle={tooltipContentStyle}
-                                    formatter={(value) => [
-                                        `${String(value ?? 0)}%`,
-                                        'QRS',
-                                    ]}
-                                    labelFormatter={(_, payload) => {
-                                        const item = payload?.[0]?.payload as
-                                            | ChartDatum
-                                            | undefined;
-
-                                        return item
-                                            ? `${item.date} · ${item.week}`
-                                            : '';
-                                    }}
-                                />
-                                <ReferenceLine
-                                    y={75}
-                                    stroke="#10b981"
-                                    strokeDasharray="4 4"
-                                />
-                                <ReferenceLine
-                                    y={35}
-                                    stroke="#f43f5e"
-                                    strokeDasharray="4 4"
-                                />
-                                <Area
-                                    type="monotone"
-                                    dataKey="qrs"
-                                    stroke="var(--chart-1)"
-                                    strokeWidth={2}
-                                    fill="url(#finestraQrsFill)"
-                                    activeDot={{ r: 4 }}
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                <div className="rounded-md border border-border bg-card p-4 lg:col-span-8">
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 className="text-sm font-semibold text-foreground">
+                                Tren Quick Recovery Score (QRS)
+                            </h3>
+                            <p className="text-xs text-muted-foreground">
+                                Skala 0–100% dengan ambang zona optimal (75%)
+                                dan batas pemulihan rendah (35%)
+                            </p>
+                        </div>
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <span className="inline-flex items-center gap-1.5">
+                                <span className="size-1.5 rounded-full bg-emerald-500" />
+                                Optimal ≥ 75%
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                                <span className="size-1.5 rounded-full bg-rose-500" />
+                                Kurang &lt; 35%
+                            </span>
+                        </div>
                     </div>
-                )}
+
+                    {!isMounted ? (
+                        <ChartSkeleton />
+                    ) : (
+                        <div className="h-64 w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart
+                                    data={chartData}
+                                    margin={{
+                                        top: 8,
+                                        right: 16,
+                                        left: 0,
+                                        bottom: 0,
+                                    }}
+                                >
+                                    <defs>
+                                        <linearGradient
+                                            id="finestraQrsFill"
+                                            x1="0"
+                                            y1="0"
+                                            x2="0"
+                                            y2="1"
+                                        >
+                                            <stop
+                                                offset="5%"
+                                                stopColor="var(--chart-1)"
+                                                stopOpacity={0.28}
+                                            />
+                                            <stop
+                                                offset="95%"
+                                                stopColor="var(--chart-1)"
+                                                stopOpacity={0.02}
+                                            />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid
+                                        strokeDasharray="3 3"
+                                        stroke="var(--border)"
+                                        vertical={false}
+                                    />
+                                    <XAxis
+                                        dataKey="label"
+                                        tick={{
+                                            fill: 'var(--muted-foreground)',
+                                            fontSize: 11,
+                                        }}
+                                        tickLine={false}
+                                        axisLine={{ stroke: 'var(--border)' }}
+                                    />
+                                    <YAxis
+                                        domain={[0, 100]}
+                                        tick={{
+                                            fill: 'var(--muted-foreground)',
+                                            fontSize: 11,
+                                        }}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        unit="%"
+                                        width={42}
+                                    />
+                                    <Tooltip
+                                        contentStyle={tooltipContentStyle}
+                                        formatter={(value) => [
+                                            `${String(value ?? 0)}%`,
+                                            'QRS',
+                                        ]}
+                                        labelFormatter={(_, payload) => {
+                                            const item = payload?.[0]
+                                                ?.payload as
+                                                | ChartDatum
+                                                | undefined;
+
+                                            return item
+                                                ? `${item.date} · ${item.week}`
+                                                : '';
+                                        }}
+                                    />
+                                    <ReferenceLine
+                                        y={75}
+                                        stroke="#10b981"
+                                        strokeDasharray="4 4"
+                                    />
+                                    <ReferenceLine
+                                        y={35}
+                                        stroke="#f43f5e"
+                                        strokeDasharray="4 4"
+                                    />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="qrs"
+                                        stroke="var(--chart-1)"
+                                        strokeWidth={2}
+                                        fill="url(#finestraQrsFill)"
+                                        activeDot={{ r: 4 }}
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            {/* 2. RHR vs Baseline & SpO2 Grid */}
+            {/* 2. BHR vs Baseline & SpO2 Grid */}
             <div className="grid gap-4 lg:grid-cols-2">
                 <div className="rounded-md border border-border bg-card p-4">
                     <div className="mb-4 flex items-start justify-between gap-2">
                         <div>
                             <h3 className="text-sm font-semibold text-foreground">
-                                Resting Heart Rate (RHR) vs Baseline
+                                Basal Heart Rate (BHR) vs Baseline
                             </h3>
                             <p className="text-xs text-muted-foreground">
-                                Kenaikan RHR di atas baseline menandakan
+                                Kenaikan BHR di atas baseline menandakan
                                 akumulasi kelelahan otonom
                             </p>
                         </div>
@@ -263,7 +271,7 @@ export function AnalyticsCharts({ metrics, baselineRhr }: Props) {
                                         contentStyle={tooltipContentStyle}
                                         formatter={(value) => [
                                             `${String(value ?? 0)} bpm`,
-                                            'RHR',
+                                            'BHR',
                                         ]}
                                     />
                                     {baselineRhr !== null && (

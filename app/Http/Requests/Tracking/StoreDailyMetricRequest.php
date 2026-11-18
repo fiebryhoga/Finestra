@@ -34,9 +34,9 @@ class StoreDailyMetricRequest extends FormRequest
         return [
             'record_date.required' => 'Tanggal pencatatan wajib diisi.',
             'record_date.date' => 'Format tanggal pencatatan tidak valid.',
-            'rhr.required' => 'RHR wajib diisi.',
-            'rhr.numeric' => 'RHR harus berupa angka.',
-            'rhr.max' => 'RHR maksimal 220 bpm.',
+            'rhr.required' => 'BHR (Basal Heart Rate) wajib diisi.',
+            'rhr.numeric' => 'BHR harus berupa angka.',
+            'rhr.max' => 'BHR maksimal 220 bpm.',
             'spo2.required' => 'SpO₂ wajib diisi.',
             'spo2.numeric' => 'SpO₂ harus berupa angka.',
             'spo2.max' => 'SpO₂ maksimal 100%.',
