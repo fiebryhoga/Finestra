@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AthleteController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +19,21 @@ Route::get('/', function (): RedirectResponse {
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('athletes', [AthleteController::class, 'index'])->name('athletes.index');
+    Route::post('athletes', [AthleteController::class, 'store'])->name('athletes.store');
+    Route::patch('athletes/{athlete}', [AthleteController::class, 'update'])->name('athletes.update');
+    Route::delete('athletes/{athlete}', [AthleteController::class, 'destroy'])->name('athletes.destroy');
+
+    Route::get('tracking', [TrackingController::class, 'index'])->name('tracking.index');
+    Route::get('tracking/{athlete}', [TrackingController::class, 'show'])->name('tracking.show');
+    Route::get('tracking/{athlete}/bulk', [TrackingController::class, 'bulk'])->name('tracking.bulk');
+    Route::post('tracking/{athlete}/metrics', [TrackingController::class, 'store'])->name('tracking.metrics.store');
+    Route::post('tracking/{athlete}/bulk', [TrackingController::class, 'storeBulk'])->name('tracking.bulk.store');
+    Route::post('tracking/{athlete}/start-date', [TrackingController::class, 'setStartDate'])->name('tracking.start-date');
+    Route::delete('tracking/{athlete}/metrics/{dailyMetric}', [TrackingController::class, 'destroy'])->name('tracking.metrics.destroy');
+    Route::get('tracking/{athlete}/export-pdf', [TrackingController::class, 'exportPdf'])->name('tracking.export-pdf');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::post('users', [UserController::class, 'store'])->name('users.store');

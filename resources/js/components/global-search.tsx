@@ -1,7 +1,9 @@
 import { router } from '@inertiajs/react';
 import type { LucideIcon } from 'lucide-react';
 import {
+    Activity,
     CornerDownLeft,
+    HeartPulse,
     KeyRound,
     LayoutGrid,
     Monitor,
@@ -24,8 +26,10 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { edit as editAppearance } from '@/routes/appearance';
+import { index as athletesIndex } from '@/routes/athletes';
 import { edit as editProfile } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
+import { index as trackingIndex } from '@/routes/tracking';
 import { index as usersIndex } from '@/routes/users';
 
 type SearchItem = {
@@ -61,6 +65,45 @@ export function GlobalSearch() {
                 ],
                 icon: LayoutGrid,
                 onSelect: () => router.visit(dashboard()),
+            },
+            {
+                id: 'nav-tracking',
+                group: 'Navigasi',
+                title: 'Tracking Quick Recovery',
+                description:
+                    'Pantau pemulihan harian (QRS), RHR, SpO₂, VJ, VO₂ Max, dan Peak Power',
+                keywords: [
+                    'tracking',
+                    'recovery',
+                    'qrs',
+                    'rhr',
+                    'spo2',
+                    'vj',
+                    'vo2',
+                    'peak power',
+                    'daily',
+                    'harian',
+                ],
+                icon: HeartPulse,
+                onSelect: () => router.visit(trackingIndex()),
+            },
+            {
+                id: 'nav-athletes',
+                group: 'Navigasi',
+                title: 'Manajemen Atlet',
+                description:
+                    'Kelola data atlet, tanggal lahir, berat badan, dan tinggi badan',
+                keywords: [
+                    'atlet',
+                    'athlete',
+                    'berat',
+                    'tinggi',
+                    'antropometri',
+                    'bmi',
+                    'imt',
+                ],
+                icon: Activity,
+                onSelect: () => router.visit(athletesIndex()),
             },
             {
                 id: 'nav-users',

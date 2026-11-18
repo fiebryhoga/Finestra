@@ -92,9 +92,6 @@ export default function AuthSplitLayout({
         return () => window.clearInterval(timer);
     }, [activeIndex]);
 
-    const currentSlide = showcaseSlides[activeIndex];
-    const CurrentIcon = currentSlide.icon;
-
     return (
         <div className="relative grid min-h-dvh bg-background lg:grid-cols-2">
             <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-border/60 bg-[oklch(0.145_0.042_258)] p-10 text-slate-100 lg:flex">
@@ -159,55 +156,70 @@ export default function AuthSplitLayout({
                 </div>
 
                 <div className="relative z-10 mt-auto max-w-xl space-y-6 pt-12">
-                    <div
-                        key={currentSlide.id}
-                        className="animate-in space-y-4 duration-500 fade-in"
-                    >
-                        <div className="inline-flex items-center gap-2 text-xs font-medium text-sky-300">
-                            <CurrentIcon className="size-3.5" />
-                            <span>{currentSlide.category}</span>
-                        </div>
+                    <div className="grid">
+                        {showcaseSlides.map((slide, index) => {
+                            const isActive = index === activeIndex;
+                            const SlideIcon = slide.icon;
 
-                        <h2 className="text-3xl leading-tight font-semibold tracking-tight text-white">
-                            {currentSlide.title}
-                        </h2>
-
-                        <p className="text-sm leading-relaxed text-slate-200/85">
-                            {currentSlide.description}
-                        </p>
-
-                        <div className="inline-flex items-center gap-4 rounded-md border border-white/15 bg-[oklch(0.14_0.04_258)]/70 px-4 py-3 backdrop-blur-md">
-                            <div className="space-y-0.5">
-                                <p className="text-[11px] font-medium text-slate-300/80">
-                                    {currentSlide.metricLabel}
-                                </p>
-                                <div className="flex items-baseline gap-1.5 tabular-nums">
-                                    <span className="text-xl font-semibold tracking-tight text-white">
-                                        {currentSlide.metricValue}
-                                    </span>
-                                    <span className="text-xs text-slate-300">
-                                        {currentSlide.metricUnit}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="h-8 w-px bg-white/15" />
-
-                            <span
-                                className={cn(
-                                    'inline-flex items-center gap-1.5 text-xs font-medium',
-                                    currentSlide.statusTextClass,
-                                )}
-                            >
-                                <span
+                            return (
+                                <div
+                                    key={slide.id}
+                                    aria-hidden={!isActive}
                                     className={cn(
-                                        'size-1.5 rounded-full',
-                                        currentSlide.dotClass,
+                                        'col-start-1 row-start-1 space-y-4 transition-opacity duration-500',
+                                        isActive
+                                            ? 'opacity-100'
+                                            : 'pointer-events-none opacity-0',
                                     )}
-                                />
-                                {currentSlide.status}
-                            </span>
-                        </div>
+                                >
+                                    <div className="inline-flex items-center gap-2 text-xs font-medium text-sky-300">
+                                        <SlideIcon className="size-3.5" />
+                                        <span>{slide.category}</span>
+                                    </div>
+
+                                    <h2 className="text-3xl leading-tight font-semibold tracking-tight text-white">
+                                        {slide.title}
+                                    </h2>
+
+                                    <p className="text-sm leading-relaxed text-slate-200/85">
+                                        {slide.description}
+                                    </p>
+
+                                    <div className="inline-flex items-center gap-4 rounded-md border border-white/15 bg-[oklch(0.14_0.04_258)]/70 px-4 py-3 backdrop-blur-md">
+                                        <div className="space-y-0.5">
+                                            <p className="text-[11px] font-medium text-slate-300/80">
+                                                {slide.metricLabel}
+                                            </p>
+                                            <div className="flex items-baseline gap-1.5 tabular-nums">
+                                                <span className="text-xl font-semibold tracking-tight text-white">
+                                                    {slide.metricValue}
+                                                </span>
+                                                <span className="text-xs text-slate-300">
+                                                    {slide.metricUnit}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="h-8 w-px bg-white/15" />
+
+                                        <span
+                                            className={cn(
+                                                'inline-flex items-center gap-1.5 text-xs font-medium',
+                                                slide.statusTextClass,
+                                            )}
+                                        >
+                                            <span
+                                                className={cn(
+                                                    'size-1.5 rounded-full',
+                                                    slide.dotClass,
+                                                )}
+                                            />
+                                            {slide.status}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <div className="flex items-center justify-between border-t border-white/15 pt-5">

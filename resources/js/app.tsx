@@ -46,3 +46,9 @@ void createInertiaApp({
 
 // This will set light / dark mode on load...
 initializeTheme();
+
+if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+        window.location.reload();
+    });
+}
