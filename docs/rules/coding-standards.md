@@ -33,4 +33,6 @@
 
 ## 4. Larangan / Anti-Pattern
 
-- _(Tambahkan hal-hal yang dilarang secara eksplisit di project ini)_
+- **Dilarang menggunakan `font-mono` / font monospace** di komponen UI mana pun — selalu gunakan `font-sans` (`Instrument Sans`) dan tambahkan `tabular-nums` untuk angka/metrik.
+- **Dilarang menggunakan warna hardcoded** (`bg-white`, `text-black`, hex langsung) di komponen UI — selalu gunakan semantic token tema dari `resources/css/app.css`.
+- **Dilarang membiarkan halaman 404 default Laravel** tampil ke pengguna web — seluruh halaman error web wajib melalui halaman Inertia di `resources/js/pages/errors/` dengan tetap mempertahankan HTTP status code asli (`404`).

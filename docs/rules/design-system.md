@@ -77,9 +77,10 @@ Digunakan secara konsisten untuk klasifikasi **ACWR**, **Fatigue Index**, **Read
 
 ## 3. Tipografi & Penyajian Data Numerik
 
-- **Font Utama (UI)**: `Instrument Sans` (bawaan stack), bersih dan presisi pada ukuran kecil hingga besar.
+- **Font Utama (UI)**: `Instrument Sans` (`font-sans`, bawaan stack), bersih dan presisi pada ukuran kecil hingga besar.
+- **Larangan Font Monospace**: **Dilarang menggunakan `font-mono` atau font monospace** di seluruh antarmuka (termasuk label versi, kode ID, angka metrik, maupun tabel). Gunakan `font-sans` secara konsisten di seluruh aplikasi.
 - **Angka & Telemetry (`tabular-nums`)**:
-    - Seluruh angka metrik, tabel pengukuran, delta persentase (`-10.4%`), jam/durasi, dan skor kuesioner **wajib** memakai class `tabular-nums` (dan boleh memakai `font-mono` untuk kode ID atlet / nilai presisi tinggi) agar kolom angka rata lurus secara vertikal.
+    - Seluruh angka metrik, tabel pengukuran, delta persentase (`-10.4%`), jam/durasi, dan skor kuesioner **wajib** memakai class `tabular-nums` (tetap menggunakan `font-sans`, **bukan** `font-mono`) agar kolom angka rata lurus secara vertikal.
     - Tampilkan **satuan** dengan ukuran lebih kecil dan warna `text-muted-foreground` tepat di samping nilai (contoh: `54` `bpm`, `98` `%`, `42.5` `cm`, `1.18` `ratio`).
 - **Hierarki Skala**:
     - **Page Title**: `text-2xl font-semibold tracking-tight`
@@ -119,3 +120,26 @@ Digunakan secara konsisten untuk klasifikasi **ACWR**, **Fatigue Index**, **Read
     - **Loading State**: Gunakan `Skeleton` yang menyerupai bentuk konten asli, hindari spinner layar penuh kecuali aksi transisi kritis.
     - **Error & Validation State**: Pesan error validasi fisiologis jelas di bawah field (`InputError`) disertai contoh rentang normal jika membantu enumerator/atlet.
     - **Feedback Aksi**: Gunakan toast (`sonner`) untuk konfirmasi simpan/ekspor/hapus yang tidak mengganggu alur input beruntun.
+
+---
+
+## 6. Aturan Halaman Error & 404 (Not Found)
+
+Halaman error (khususnya **404 Not Found**) **dilarang** menggunakan tampilan Blade polos bawaan Laravel (`404 | Not Found`). Seluruh halaman error user-facing wajib dibangun sebagai halaman **Inertia React (`.tsx`)** agar konsisten dengan identitas visual Finestra.
+
+1. **Konsistensi Desain & Tema**:
+    - Wajib mengikuti seluruh aturan Design System Finestra: gaya minimalis **shadcn/ui**, palet **Biru Navy** via semantic token (`bg-background`, `bg-card`, `text-foreground`, `text-muted-foreground`, `border-border`, `bg-primary`), dukungan penuh **Light & Dark Mode** (termasuk `ThemeToggle`), serta **tanpa `font-mono`**.
+    - Kode status (`404`) menggunakan `Instrument Sans` (`font-sans`) dengan `tabular-nums`.
+    - Boleh menyertakan elemen visual mikro bertema _sports science_ yang tenang dan presisi (mis. ilustrasi gelombang sinyal terputus/_flatline_ SVG minimalis) — tanpa ilustrasi kartun atau animasi berlebihan.
+2. **Standar Layout Standalone**:
+    - Halaman di folder `resources/js/pages/errors/` tidak dibungkus `AppLayout` (sidebar) agar tetap bersih baik untuk _guest_ maupun pengguna login.
+    - Menampilkan header ringkas dengan identitas **Finestra** di kiri dan `ThemeToggle` di kanan.
+3. **Konten & Navigasi Pemulihan**:
+    - Copywriting dalam Bahasa Indonesia yang jelas, tenang, dan informatif (tidak menyalahkan pengguna dan tidak membocorkan detail teknis internal).
+    - **Aksi Utama (Context-Aware)**:
+        - Pengguna sudah login → tombol utama **Kembali ke Dashboard** (`/dashboard`).
+        - Pengguna belum login (_guest_) → tombol utama **Kembali ke Halaman Masuk** (`/login`).
+    - **Aksi Sekunder**: tombol **Halaman Sebelumnya** (`window.history.back()`).
+4. **Integritas HTTP & API**:
+    - Response **wajib** tetap mengembalikan HTTP status code asli (`404 Not Found`), bukan `200 OK` atau redirect paksa.
+    - Request API atau yang meminta JSON (`api/*` / `Accept: application/json`) tetap mengembalikan response JSON `404`, bukan halaman Inertia.
