@@ -59,4 +59,18 @@ class NotFoundTest extends TestCase
             ->assertNotFound()
             ->assertJson(['message' => 'Halaman tidak ditemukan.']);
     }
+
+    public function test_unused_confirm_password_route_returns_custom_404_instead_of_500(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/user/confirm-password');
+
+        $response
+            ->assertNotFound()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('errors/not-found')
+                ->where('status', 404),
+            );
+    }
 }

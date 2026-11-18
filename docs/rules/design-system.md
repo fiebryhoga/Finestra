@@ -10,7 +10,7 @@
 Finestra dirancang sebagai instrumen **sports science** modern — bukan aplikasi olahraga kasual yang ramai atau penuh dekorasi. Setiap elemen visual harus melayani kejernihan data fisiologis dan neuromuskular atlet.
 
 1. **Minimalis & Presisi (shadcn/ui First)**
-    - Gunakan permukaan bersih, border tipis (`1px solid var(--border)`), radius konsisten (`0.625rem`), dan whitespace yang lega.
+    - Gunakan permukaan bersih, border tipis (`1px solid var(--border)`), **radius wajib `rounded-md`** di seluruh komponen, card, panel, modal, alert, input, dan tombol (dilarang memakai `rounded-lg`, `rounded-xl`, `rounded-2xl`, atau radius besar lainnya; pengecualian hanya untuk elemen lingkaran murni seperti `Avatar` atau titik status `size-1.5 rounded-full`), serta whitespace yang lega.
     - Hindari gradasi mencolok, bayangan tebal (_heavy drop-shadow_), glassmorphism berlebihan, animasi dekoratif, maupun **pill/badge ber-background warna (_tinted pill badge_)** yang terkesan ramai atau generik.
     - Untuk label kategori, _eyebrow text_, atau status, gunakan **tipografi bersih atau titik indikator (_status dot_) + teks** tanpa kotak/background pill.
 2. **Data-First Sports Science Ergonomics**

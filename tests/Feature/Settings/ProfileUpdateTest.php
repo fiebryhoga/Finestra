@@ -110,6 +110,7 @@ class ProfileUpdateTest extends TestCase
 
     public function test_user_can_delete_their_account(): void
     {
+        User::factory()->create();
         $user = User::factory()->create();
 
         $response = $this
@@ -124,6 +125,23 @@ class ProfileUpdateTest extends TestCase
 
         $this->assertGuest();
         $this->assertNull($user->fresh());
+    }
+
+    public function test_last_remaining_active_user_cannot_delete_their_account(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->from(route('profile.edit'))
+            ->delete(route('profile.destroy'), [
+                'password' => 'password',
+            ]);
+
+        $response->assertRedirect(route('profile.edit'));
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertNotNull($user->fresh());
     }
 
     public function test_correct_password_must_be_provided_to_delete_account(): void

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileDeleteRequest;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -39,6 +40,15 @@ class ProfileController extends Controller
     public function destroy(ProfileDeleteRequest $request): RedirectResponse
     {
         $user = $request->user();
+
+        if (User::query()->where('is_active', true)->whereKeyNot($user->id)->doesntExist()) {
+            Inertia::flash('toast', [
+                'type' => 'error',
+                'message' => 'Tidak dapat menghapus satu-satunya akun aktif yang tersisa.',
+            ]);
+
+            return back();
+        }
 
         Auth::logout();
 

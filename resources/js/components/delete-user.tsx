@@ -26,7 +26,7 @@ export default function DeleteUser() {
                 title="Hapus Akun"
                 description="Hapus akun Anda secara permanen dari sistem"
             />
-            <div className="space-y-4 rounded-lg border border-destructive/20 bg-destructive/5 p-4">
+            <div className="space-y-4 rounded-md border border-destructive/20 bg-destructive/5 p-4">
                 <div className="relative space-y-0.5 text-destructive">
                     <p className="font-medium">Peringatan</p>
                     <p className="text-sm text-destructive/90">

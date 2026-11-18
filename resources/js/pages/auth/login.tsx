@@ -18,7 +18,7 @@ export default function Login({ status }: Props) {
             <Head title="Masuk" />
 
             {status && (
-                <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                <div className="rounded-md border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                     {status}
                 </div>
             )}

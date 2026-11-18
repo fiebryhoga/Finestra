@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Administrator Finestra',
                 'password' => 'password',
+                'is_active' => true,
             ],
         );
     }

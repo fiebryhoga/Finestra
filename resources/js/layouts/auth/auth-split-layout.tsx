@@ -176,7 +176,7 @@ export default function AuthSplitLayout({
                             {currentSlide.description}
                         </p>
 
-                        <div className="inline-flex items-center gap-4 rounded-xl border border-white/15 bg-[oklch(0.14_0.04_258)]/70 px-4 py-3 backdrop-blur-md">
+                        <div className="inline-flex items-center gap-4 rounded-md border border-white/15 bg-[oklch(0.14_0.04_258)]/70 px-4 py-3 backdrop-blur-md">
                             <div className="space-y-0.5">
                                 <p className="text-[11px] font-medium text-slate-300/80">
                                     {currentSlide.metricLabel}

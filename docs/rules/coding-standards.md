@@ -33,7 +33,9 @@
 
 ## 4. Larangan / Anti-Pattern
 
+- **Wajib menggunakan `rounded-md`** untuk seluruh sudut komponen, card, panel, tombol, input, modal, dan container (dilarang menggunakan `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`, dll.; pengecualian hanya untuk lingkaran murni seperti `Avatar` dan status dot `size-1.5 rounded-full`).
 - **Dilarang menggunakan pill/badge dengan background warna tinted** (`rounded-full bg-*-500/10 border-*-500/20`, dll.) untuk label kategori, _eyebrow_, maupun status — gunakan teks bersih atau kombinasi `status dot` + teks semantik.
+- **Wajib menggunakan `rounded-md`** untuk seluruh sudut komponen, card, panel, tombol, input, modal, dan container (dilarang menggunakan `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`, dll.; pengecualian hanya untuk lingkaran murni seperti `Avatar` dan status dot `size-1.5 rounded-full`).
 - **Dilarang menggunakan pill/badge dengan background warna tinted** (`rounded-full bg-*-500/10 border-*-500/20`, dll.) untuk label kategori, _eyebrow_, maupun status — gunakan teks bersih atau kombinasi `status dot` + teks semantik.
 - **Dilarang menggunakan `font-mono` / font monospace** di komponen UI mana pun — selalu gunakan `font-sans` (`Instrument Sans`) dan tambahkan `tabular-nums` untuk angka/metrik.
 - **Dilarang menggunakan warna hardcoded** (`bg-white`, `text-black`, hex langsung) di komponen UI — selalu gunakan semantic token tema dari `resources/css/app.css`.

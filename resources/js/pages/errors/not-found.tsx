@@ -65,8 +65,8 @@ export default function NotFound({ status = 404 }: Props) {
                 </header>
 
                 <main className="flex flex-1 items-center justify-center px-6 py-16">
-                    <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-8 text-center sm:p-10">
-                        <div className="mx-auto mb-6 flex w-full max-w-xs items-center justify-center rounded-xl border border-border/80 bg-muted/40 px-5 py-4">
+                    <div className="w-full max-w-lg rounded-md border border-border bg-card p-8 text-center sm:p-10">
+                        <div className="mx-auto mb-6 flex w-full max-w-xs items-center justify-center rounded-md border border-border/80 bg-muted/40 px-5 py-4">
                             <svg
                                 viewBox="0 0 240 48"
                                 fill="none"
