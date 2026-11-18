@@ -1,0 +1,24 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="phynestra-primary" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1E3A6D" />
+            <stop offset="100%" stop-color="#0F2347" />
+        </linearGradient>
+        <linearGradient id="phynestra-accent" x1="20" y1="32" x2="36" y2="42" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#38BDF8" />
+            <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+    </defs>
+    <!-- Geometric Phynestra "P" Monogram -->
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M14.1 7H29.4C37.1 7 41.4 11.3 40.3 18.1C39.2 24.8 33.7 28.8 26.2 28.8H18.1L16.5 39.6C16.3 40.4 15.6 41 14.8 41H9.1C8.2 41 7.6 40.2 7.8 39.3L12.5 8.4C12.7 7.6 13.3 7 14.1 7ZM20.3 13.8L19.1 22H26.1C29.7 22 31.9 20.4 32.3 17.9C32.7 15.4 31 13.8 27.4 13.8H20.3Z"
+        fill="url(#phynestra-primary)"
+    />
+    <!-- Kinetic Physiological Accent Bar -->
+    <path
+        d="M22.2 33.4H34.4C35.3 33.4 35.9 34.2 35.7 35L34.9 39.6C34.7 40.4 34 41 33.2 41H21C20.1 41 19.5 40.2 19.7 39.4L20.5 34.8C20.7 34 21.4 33.4 22.2 33.4Z"
+        fill="url(#phynestra-accent)"
+    />
+</svg>

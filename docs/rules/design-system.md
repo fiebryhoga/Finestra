@@ -1,4 +1,4 @@
-# Design System & Aturan UI/UX — Finestra
+# Design System & Aturan UI/UX — Phynestra
 
 > **Status**: `Aktif (v1.0)`  
 > **Identitas Visual**: Minimalis **shadcn/ui** • Tema **Biru Navy** • **Light & Dark Mode** • Estetika **Sports Science & Performance Lab**
@@ -7,7 +7,7 @@
 
 ## 1. Prinsip Desain & Identitas Visual
 
-Finestra dirancang sebagai instrumen **sports science** modern — bukan aplikasi olahraga kasual yang ramai atau penuh dekorasi. Setiap elemen visual harus melayani kejernihan data fisiologis dan neuromuskular atlet.
+Phynestra dirancang sebagai instrumen **sports science** modern — bukan aplikasi olahraga kasual yang ramai atau penuh dekorasi. Setiap elemen visual harus melayani kejernihan data fisiologis dan neuromuskular atlet.
 
 1. **Minimalis & Presisi (shadcn/ui First)**
     - Gunakan permukaan bersih, border tipis (`1px solid var(--border)`), **radius wajib `rounded-md`** di seluruh komponen, card, panel, modal, alert, input, dan tombol (dilarang memakai `rounded-lg`, `rounded-xl`, `rounded-2xl`, atau radius besar lainnya; pengecualian hanya untuk elemen lingkaran murni seperti `Avatar` atau titik status `size-1.5 rounded-full`), serta whitespace yang lega.
@@ -128,15 +128,15 @@ Digunakan secara konsisten untuk klasifikasi **ACWR**, **Fatigue Index**, **Read
 
 ## 6. Aturan Halaman Error & 404 (Not Found)
 
-Halaman error (khususnya **404 Not Found**) **dilarang** menggunakan tampilan Blade polos bawaan Laravel (`404 | Not Found`). Seluruh halaman error user-facing wajib dibangun sebagai halaman **Inertia React (`.tsx`)** agar konsisten dengan identitas visual Finestra.
+Halaman error (khususnya **404 Not Found**) **dilarang** menggunakan tampilan Blade polos bawaan Laravel (`404 | Not Found`). Seluruh halaman error user-facing wajib dibangun sebagai halaman **Inertia React (`.tsx`)** agar konsisten dengan identitas visual Phynestra.
 
 1. **Konsistensi Desain & Tema**:
-    - Wajib mengikuti seluruh aturan Design System Finestra: gaya minimalis **shadcn/ui**, palet **Biru Navy** via semantic token (`bg-background`, `bg-card`, `text-foreground`, `text-muted-foreground`, `border-border`, `bg-primary`), dukungan penuh **Light & Dark Mode** (termasuk `ThemeToggle`), serta **tanpa `font-mono`**.
+    - Wajib mengikuti seluruh aturan Design System Phynestra: gaya minimalis **shadcn/ui**, palet **Biru Navy** via semantic token (`bg-background`, `bg-card`, `text-foreground`, `text-muted-foreground`, `border-border`, `bg-primary`), dukungan penuh **Light & Dark Mode** (termasuk `ThemeToggle`), serta **tanpa `font-mono`**.
     - Kode status (`404`) menggunakan `Instrument Sans` (`font-sans`) dengan `tabular-nums`.
     - Boleh menyertakan elemen visual mikro bertema _sports science_ yang tenang dan presisi (mis. ilustrasi gelombang sinyal terputus/_flatline_ SVG minimalis) — tanpa ilustrasi kartun atau animasi berlebihan.
 2. **Standar Layout Standalone**:
     - Halaman di folder `resources/js/pages/errors/` tidak dibungkus `AppLayout` (sidebar) agar tetap bersih baik untuk _guest_ maupun pengguna login.
-    - Menampilkan header ringkas dengan identitas **Finestra** di kiri dan `ThemeToggle` di kanan.
+    - Menampilkan header ringkas dengan identitas **Phynestra** di kiri dan `ThemeToggle` di kanan.
 3. **Konten & Navigasi Pemulihan**:
     - Copywriting dalam Bahasa Indonesia yang jelas, tenang, dan informatif (tidak menyalahkan pengguna dan tidak membocorkan detail teknis internal).
     - **Aksi Utama (Context-Aware)**:

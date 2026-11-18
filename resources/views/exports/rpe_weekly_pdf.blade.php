@@ -257,7 +257,7 @@
     <div class="pdf-footer">
         <table>
             <tr>
-                <td style="text-align: left;">Finestra · Monitoring Beban Latihan (sRPE &amp; ACWR Weekly) · FIKK UNESA</td>
+                <td style="text-align: left;">Phynestra · Monitoring Beban Latihan (sRPE &amp; ACWR Weekly) · FIKK UNESA</td>
                 <td style="text-align: right;">Dicetak {{ $generatedAt }}</td>
             </tr>
         </table>
@@ -267,7 +267,7 @@
         <table class="header-table">
             <tr>
                 <td style="width: 68%;">
-                    <p class="brand-kicker">Finestra Sports Science</p>
+                    <p class="brand-kicker">Phynestra Sports Science</p>
                     <p class="header-title">Laporan Beban Latihan (sRPE) &amp; ACWR Weekly</p>
                     <div class="header-sub">
                         Metode Foster CR-10 &amp; Gabbett Coupled 4-Week Rolling Average · FIKK UNESA

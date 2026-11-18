@@ -414,7 +414,7 @@ class RpeController extends Controller
             'generatedAt' => Carbon::now()->format('d M Y, H:i'),
         ])->setPaper('a4', 'portrait');
 
-        $filename = 'finestra-rpe-acwr-'.Str::slug($athlete->name).'.pdf';
+        $filename = 'phynestra-rpe-acwr-'.Str::slug($athlete->name).'.pdf';
 
         return $pdf->download($filename);
     }

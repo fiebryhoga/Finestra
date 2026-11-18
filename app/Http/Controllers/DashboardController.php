@@ -18,7 +18,7 @@ class DashboardController extends Controller
     ) {}
 
     /**
-     * Display the Finestra sports science monitoring dashboard.
+     * Display the Phynestra sports science monitoring dashboard.
      */
     public function __invoke(): Response
     {

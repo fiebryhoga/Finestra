@@ -1,7 +1,7 @@
-# Product Requirements Document (PRD) — Finestra
+# Product Requirements Document (PRD) — Phynestra
 
 > **Status**: `[Draft / Siap Diisi]`  
-> **Nama Produk**: Finestra (_Physiological and Neuromuscular Tracking_)  
+> **Nama Produk**: Phynestra (_Physiological and Neuromuscular Tracking_)  
 > **Referensi Ilmiah**: [`docs/research/01-usulan-penelitian-unesa-2026.md`](../research/01-usulan-penelitian-unesa-2026.md)
 
 ---

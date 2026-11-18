@@ -10,7 +10,7 @@ export default function AppLogoIcon({
     ...props
 }: AppLogoIconProps) {
     const id = useId();
-    const accentId = `finestra-accent-${id}`;
+    const accentId = `phynestra-accent-${id}`;
 
     return (
         <svg
@@ -24,9 +24,9 @@ export default function AppLogoIcon({
                 <linearGradient
                     id={accentId}
                     x1="20"
-                    y1="20"
-                    x2="38"
-                    y2="30"
+                    y1="33"
+                    x2="36"
+                    y2="41"
                     gradientUnits="userSpaceOnUse"
                 >
                     <stop offset="0%" stopColor="#38BDF8" />
@@ -35,7 +35,9 @@ export default function AppLogoIcon({
             </defs>
 
             <path
-                d="M14.5 7H40.5C41.4 7 42 7.8 41.8 8.7L40.3 14.5C40.1 15.2 39.5 15.7 38.7 15.7H21.8L17.4 39.6C17.2 40.4 16.5 41 15.7 41H8.8C7.9 41 7.2 40.2 7.4 39.3L12.8 8.4C13 7.6 13.7 7 14.5 7Z"
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M14.1 7H29.4C37.1 7 41.4 11.3 40.3 18.1C39.2 24.8 33.7 28.8 26.2 28.8H18.1L16.5 39.6C16.3 40.4 15.6 41 14.8 41H9.1C8.2 41 7.6 40.2 7.8 39.3L12.5 8.4C12.7 7.6 13.3 7 14.1 7ZM20.3 13.8L19.1 22H26.1C29.7 22 31.9 20.4 32.3 17.9C32.7 15.4 31 13.8 27.4 13.8H20.3Z"
                 className={
                     inverted
                         ? 'fill-white'
@@ -44,17 +46,8 @@ export default function AppLogoIcon({
             />
 
             <path
-                d="M23.6 20.5H36.6C37.5 20.5 38.1 21.3 37.9 22.2L36.7 27.6C36.5 28.3 35.9 28.8 35.1 28.8H22.1C21.2 28.8 20.6 28 20.8 27.1L22 21.7C22.2 21 22.8 20.5 23.6 20.5Z"
+                d="M22.2 33.4H34.4C35.3 33.4 35.9 34.2 35.7 35L34.9 39.6C34.7 40.4 34 41 33.2 41H21C20.1 41 19.5 40.2 19.7 39.4L20.5 34.8C20.7 34 21.4 33.4 22.2 33.4Z"
                 fill={`url(#${accentId})`}
-            />
-
-            <path
-                d="M21.4 33.4H28.8C29.6 33.4 30.2 34.1 30 34.9L29.1 39.6C28.9 40.4 28.3 41 27.5 41H20.1C19.3 41 18.7 40.3 18.9 39.5L19.8 34.8C20 34 20.6 33.4 21.4 33.4Z"
-                className={
-                    inverted
-                        ? 'fill-sky-300/60'
-                        : 'fill-sky-500/45 dark:fill-sky-400/50'
-                }
             />
         </svg>
     );

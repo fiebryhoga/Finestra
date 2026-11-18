@@ -1,6 +1,6 @@
-# Dokumentasi & Aturan Project Finestra
+# Dokumentasi & Aturan Project Phynestra
 
-Folder ini menjadi _single source of truth_ untuk seluruh aturan teknis, panduan desain, PRD, arsitektur, dan landasan ilmiah pengembangan **Finestra (Physiological and Neuromuscular Tracking)**.
+Folder ini menjadi _single source of truth_ untuk seluruh aturan teknis, panduan desain, PRD, arsitektur, dan landasan ilmiah pengembangan **Phynestra (Physiological and Neuromuscular Tracking)**.
 
 ## Struktur Folder
 
@@ -13,7 +13,7 @@ docs/
 │   ├── feature-workflow.md                # Prosedur pembuatan fitur baru & Definition of Done
 │   └── database-and-api.md                # Aturan skema DB, migrasi, validasi, Inertia props
 ├── prd/                                   # Product Requirements Document
-│   ├── 00-prd.md                          # PRD utama produk Finestra (template siap isi)
+│   ├── 00-prd.md                          # PRD utama produk Phynestra (template siap isi)
 │   └── features/                          # Spesifikasi per fitur (mis. 01-atlet.md, 02-acwr.md)
 ├── architecture/                          # Desain sistem & keputusan arsitektur
 │   ├── system-overview.md                 # Ringkasan stack teknis & struktur codebase

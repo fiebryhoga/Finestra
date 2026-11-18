@@ -226,7 +226,7 @@ export default function AuthSplitLayout({
                         <div
                             className="flex items-center gap-2"
                             role="tablist"
-                            aria-label="Slide fitur Finestra"
+                            aria-label="Slide fitur Phynestra"
                         >
                             {showcaseSlides.map((slide, index) => {
                                 const isActive = index === activeIndex;
@@ -251,7 +251,7 @@ export default function AuthSplitLayout({
                         </div>
 
                         <span className="text-xs text-slate-300/80">
-                            Universitas Negeri Surabaya · Finestra
+                            Universitas Negeri Surabaya · Phynestra
                         </span>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
-# AGENTS.md — Panduan Agent untuk Finestra
+# AGENTS.md — Panduan Agent untuk Phynestra
 
-Project ini adalah **Finestra (Physiological and Neuromuscular Tracking)** — aplikasi web berbasis **Laravel 13 + Inertia.js v3 + React 19 + TypeScript (`.tsx`) + Tailwind CSS v4**.
+Project ini adalah **Phynestra (Physiological and Neuromuscular Tracking)** — aplikasi web berbasis **Laravel 13 + Inertia.js v3 + React 19 + TypeScript (`.tsx`) + Tailwind CSS v4**.
 
 ## Wajib Dibaca Sebelum Membangun atau Mengubah Fitur
 
@@ -12,7 +12,7 @@ Seluruh aturan project, spesifikasi produk, dan referensi ilmiah disimpan di fol
     - `docs/rules/feature-workflow.md` — Alur pembuatan fitur, struktur folder, standar testing, dan Definition of Done.
     - `docs/rules/database-and-api.md` — Konvensi skema database, migrasi, validasi, dan kontrak Inertia props.
 2. **Product Requirements (`docs/prd/`)**
-    - `docs/prd/00-prd.md` — PRD utama Finestra.
+    - `docs/prd/00-prd.md` — PRD utama Phynestra.
     - `docs/prd/features/` — Spesifikasi detail per fitur.
 3. **Arsitektur (`docs/architecture/`)**
     - `docs/architecture/system-overview.md` — Gambaran stack teknis dan struktur repositori.

@@ -88,7 +88,7 @@ export default function Login({ status }: Props) {
                         </div>
 
                         <p className="text-center text-xs text-muted-foreground">
-                            Akun pengguna dikelola oleh administrator Finestra.
+                            Akun pengguna dikelola oleh administrator Phynestra.
                         </p>
                     </>
                 )}
@@ -98,7 +98,7 @@ export default function Login({ status }: Props) {
 }
 
 Login.layout = {
-    title: 'Masuk ke Finestra',
+    title: 'Masuk ke Phynestra',
     description:
         'Masukkan username dan kata sandi Anda untuk mengakses dashboard monitoring.',
 };

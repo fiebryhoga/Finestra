@@ -464,7 +464,7 @@ class TrackingController extends Controller
             'generatedAt' => Carbon::now()->format('d M Y, H:i'),
         ])->setPaper('a4', 'portrait');
 
-        $filename = 'finestra-quick-recovery-'.Str::slug($athlete->name).'.pdf';
+        $filename = 'phynestra-quick-recovery-'.Str::slug($athlete->name).'.pdf';
 
         return $pdf->download($filename);
     }

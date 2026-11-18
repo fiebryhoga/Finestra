@@ -1,4 +1,4 @@
-# Alur Pembuatan Fitur (Feature Workflow) — Finestra
+# Alur Pembuatan Fitur (Feature Workflow) — Phynestra
 
 > **Status**: `[Template Siap Diisi]` — Lengkapi prosedur kerja dari spesifikasi hingga rilis fitur.
 

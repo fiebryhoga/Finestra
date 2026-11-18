@@ -1,4 +1,4 @@
-# Standar Penulisan Kode (Coding Standards) — Finestra
+# Standar Penulisan Kode (Coding Standards) — Phynestra
 
 > **Status**: `[Template Siap Diisi]` — Sesuaikan dan tambahkan konvensi penulisan kode backend dan frontend di sini.
 

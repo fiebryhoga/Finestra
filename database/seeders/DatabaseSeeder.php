@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::query()->firstOrCreate(
             ['username' => 'admin'],
             [
-                'name' => 'Administrator Finestra',
+                'name' => 'Administrator Phynestra',
                 'password' => 'password',
                 'is_active' => true,
             ],

@@ -265,7 +265,7 @@
     <div class="pdf-footer">
         <table>
             <tr>
-                <td style="text-align: left;">Finestra · Physiological &amp; Neuromuscular Tracking · FIKK UNESA</td>
+                <td style="text-align: left;">Phynestra · Physiological &amp; Neuromuscular Tracking · FIKK UNESA</td>
                 <td style="text-align: right;">Dicetak {{ $generatedAt }}</td>
             </tr>
         </table>
@@ -275,7 +275,7 @@
         <table class="header-table">
             <tr>
                 <td style="width: 68%;">
-                    <p class="brand-kicker">Finestra Sports Science</p>
+                    <p class="brand-kicker">Phynestra Sports Science</p>
                     <p class="header-title">Laporan Tracking Quick Recovery</p>
                     <div class="header-sub">
                         Physiological &amp; Neuromuscular Tracking · FIKK Universitas Negeri Surabaya

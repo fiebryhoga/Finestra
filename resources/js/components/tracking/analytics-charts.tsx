@@ -124,7 +124,7 @@ export function AnalyticsCharts({ metrics, baselineRhr }: Props) {
                                 >
                                     <defs>
                                         <linearGradient
-                                            id="finestraQrsFill"
+                                            id="phynestraQrsFill"
                                             x1="0"
                                             y1="0"
                                             x2="0"
@@ -199,7 +199,7 @@ export function AnalyticsCharts({ metrics, baselineRhr }: Props) {
                                         dataKey="qrs"
                                         stroke="var(--chart-1)"
                                         strokeWidth={2}
-                                        fill="url(#finestraQrsFill)"
+                                        fill="url(#phynestraQrsFill)"
                                         activeDot={{ r: 4 }}
                                     />
                                 </AreaChart>

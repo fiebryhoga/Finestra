@@ -89,7 +89,7 @@ export default function Dashboard() {
                         </h1>
                         <p className="text-sm text-muted-foreground">
                             Ringkasan kesiapan pemulihan fisiologis dan
-                            neuromuskular skuad Finestra.
+                            neuromuskular skuad Phynestra.
                         </p>
                     </div>
 

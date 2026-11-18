@@ -1,6 +1,6 @@
-# System Overview — Finestra
+# System Overview — Phynestra
 
-Dokumen ini merangkum arsitektur dasar dan tooling hasil setup awal project **Finestra (Physiological and Neuromuscular Tracking)**.
+Dokumen ini merangkum arsitektur dasar dan tooling hasil setup awal project **Phynestra (Physiological and Neuromuscular Tracking)**.
 
 ## 1. Tech Stack
 
@@ -21,7 +21,7 @@ Dokumen ini merangkum arsitektur dasar dan tooling hasil setup awal project **Fi
 ## 2. Struktur Direktori Utama
 
 ```text
-finestra/
+phynestra/
 ├── app/                   # Kode backend Laravel (Controllers, Models, Actions, Services, dll.)
 ├── bootstrap/             # Bootstrap & registrasi aplikasi
 ├── config/                # Konfigurasi Laravel
@@ -46,5 +46,5 @@ finestra/
 
 ## 3. Catatan Setup Awal
 
-- Project saat ini masih berupa **pondasi bersih (starter kit)** — fitur domain Finestra belum dibangun.
+- Project saat ini masih berupa **pondasi bersih (starter kit)** — fitur domain Phynestra belum dibangun.
 - Fitur bawaan starter kit yang sudah siap dipakai: autentikasi (login, register, verifikasi email, reset password, 2FA, passkeys), pengaturan profil & tema (light/dark/system), serta layout sidebar dashboard dasar.

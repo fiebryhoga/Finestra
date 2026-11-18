@@ -344,11 +344,11 @@ export function GlobalSearch() {
                     className="gap-0 overflow-hidden rounded-md p-0 sm:max-w-lg"
                 >
                     <DialogTitle className="sr-only">
-                        Pencarian cepat Finestra
+                        Pencarian cepat Phynestra
                     </DialogTitle>
                     <DialogDescription className="sr-only">
                         Cari halaman, pengaturan, atau jalankan aksi cepat di
-                        Finestra.
+                        Phynestra.
                     </DialogDescription>
 
                     <div className="flex items-center gap-2.5 border-b border-border px-3.5">
@@ -437,7 +437,7 @@ export function GlobalSearch() {
 
                     <div className="flex items-center justify-between border-t border-border bg-muted/40 px-3.5 py-2 text-[11px] text-muted-foreground">
                         <span>Gunakan ↑ ↓ untuk memilih, Enter untuk buka</span>
-                        <span>Finestra</span>
+                        <span>Phynestra</span>
                     </div>
                 </DialogContent>
             </Dialog>

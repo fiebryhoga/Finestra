@@ -1,4 +1,4 @@
-# Aturan Database, Validasi & Kontrak Inertia — Finestra
+# Aturan Database, Validasi & Kontrak Inertia — Phynestra
 
 > **Status**: `[Template Siap Diisi]` — Tentukan konvensi skema basis data dan pertukaran data Laravel ↔ React di sini.
 

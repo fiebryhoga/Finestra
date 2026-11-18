@@ -66,7 +66,7 @@ export function CreateAthleteDialog({ open, onOpenChange }: Props) {
                     <DialogTitle>Tambah Atlet</DialogTitle>
                     <DialogDescription>
                         Masukkan data dasar antropometri atlet untuk memulai
-                        pemantauan di Finestra.
+                        pemantauan di Phynestra.
                     </DialogDescription>
                 </DialogHeader>
 

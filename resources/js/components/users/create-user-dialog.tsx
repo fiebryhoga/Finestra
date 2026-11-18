@@ -30,7 +30,7 @@ export function CreateUserDialog({ open, onOpenChange, passwordRules }: Props) {
                     <DialogTitle>Tambah Pengguna</DialogTitle>
                     <DialogDescription>
                         Buat akun baru untuk pelatih, peneliti, atau enumerator
-                        Finestra.
+                        Phynestra.
                     </DialogDescription>
                 </DialogHeader>
 

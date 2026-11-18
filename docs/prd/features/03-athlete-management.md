@@ -1,7 +1,7 @@
 # Fitur 03 — Manajemen Atlet
 
 > **Status**: `Implementasi v1.0`  
-> **Scope**: Pengelolaan profil dasar atlet Finestra (`name`, `gender`, `date_of_birth`, `weight_kg`, `height_cm`) disertai kalkulasi otomatis usia dan IMT (BMI), soft delete untuk integritas data riset, serta pola Single-Page Table + Modal Dialog shadcn (`/athletes`).
+> **Scope**: Pengelolaan profil dasar atlet Phynestra (`name`, `gender`, `date_of_birth`, `weight_kg`, `height_cm`) disertai kalkulasi otomatis usia dan IMT (BMI), soft delete untuk integritas data riset, serta pola Single-Page Table + Modal Dialog shadcn (`/athletes`).
 
 ## 1. Tujuan
 

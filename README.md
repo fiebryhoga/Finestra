@@ -1,6 +1,6 @@
-# Finestra
+# Phynestra
 
-**Finestra — Physiological and Neuromuscular Tracking**
+**Phynestra — Physiological and Neuromuscular Tracking**
 
 Platform monitoring kelelahan atlet multidimensional berbasis web yang mengintegrasikan beban latihan (_training load_), respons fisiologis, respons neuromuskular, dan kesiapan atlet (_athlete readiness_).
 

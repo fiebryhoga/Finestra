@@ -154,7 +154,7 @@ export default function UsersIndex({
                         </h1>
                         <p className="text-sm text-muted-foreground">
                             Kelola akun pelatih, peneliti, dan enumerator yang
-                            memiliki akses ke platform Finestra.
+                            memiliki akses ke platform Phynestra.
                         </p>
                     </div>
 
@@ -287,7 +287,7 @@ export default function UsersIndex({
                             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
                                 {hasActiveFilters
                                     ? 'Coba ubah kata kunci pencarian atau filter status yang dipilih.'
-                                    : 'Tambahkan akun pertama untuk mulai mengelola akses tim Finestra.'}
+                                    : 'Tambahkan akun pertama untuk mulai mengelola akses tim Phynestra.'}
                             </p>
                             {hasActiveFilters ? (
                                 <Button

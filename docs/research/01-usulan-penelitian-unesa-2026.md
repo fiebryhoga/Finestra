@@ -1,6 +1,6 @@
 # Referensi Ilmiah 01 — Usulan Penelitian UNESA 2026
 
-Dokumen ini merupakan ringkasan terstruktur dari referensi penelitian yang menjadi landasan ilmiah pengembangan **Finestra (Physiological and Neuromuscular Tracking)**.
+Dokumen ini merupakan ringkasan terstruktur dari referensi penelitian yang menjadi landasan ilmiah pengembangan **Phynestra (Physiological and Neuromuscular Tracking)**.
 
 ---
 
@@ -25,7 +25,7 @@ Dokumen ini merupakan ringkasan terstruktur dari referensi penelitian yang menja
 
 ## 2. Kebaruan & Output Model Digital yang Diharapkan
 
-Praktik monitoring sebelumnya cenderung parsial (mengukur satu domain secara terpisah). Finestra mengintegrasikan lintas domain (**training load + respons fisiologis + respons neuromuskular + athlete readiness**) dalam satu sistem aplikasi digital yang mampu melakukan:
+Praktik monitoring sebelumnya cenderung parsial (mengukur satu domain secara terpisah). Phynestra mengintegrasikan lintas domain (**training load + respons fisiologis + respons neuromuskular + athlete readiness**) dalam satu sistem aplikasi digital yang mampu melakukan:
 
 1. Pengumpulan & penyimpanan data terintegrasi
 2. Analisis & visualisasi tren

@@ -120,7 +120,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                 >
                                     <defs>
                                         <linearGradient
-                                            id="finestraAcwrFill"
+                                            id="phynestraAcwrFill"
                                             x1="0"
                                             y1="0"
                                             x2="0"
@@ -195,7 +195,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                         dataKey="acwr"
                                         stroke="var(--chart-1)"
                                         strokeWidth={2.25}
-                                        fill="url(#finestraAcwrFill)"
+                                        fill="url(#phynestraAcwrFill)"
                                         dot={{
                                             r: 3.5,
                                             fill: 'var(--card)',

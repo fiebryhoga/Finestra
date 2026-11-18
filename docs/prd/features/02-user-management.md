@@ -1,7 +1,7 @@
 # Fitur 02 — Manajemen Pengguna (CRUD User)
 
 > **Status**: `Implementasi v1.0`  
-> **Scope**: Pengelolaan akun pengguna Finestra tanpa role (single-tier) melalui pola Single-Page Table + Modal Dialog shadcn (`/users`).
+> **Scope**: Pengelolaan akun pengguna Phynestra tanpa role (single-tier) melalui pola Single-Page Table + Modal Dialog shadcn (`/users`).
 
 ## 1. Tujuan
 
