@@ -11,7 +11,8 @@ Finestra dirancang sebagai instrumen **sports science** modern — bukan aplikas
 
 1. **Minimalis & Presisi (shadcn/ui First)**
     - Gunakan permukaan bersih, border tipis (`1px solid var(--border)`), radius konsisten (`0.625rem`), dan whitespace yang lega.
-    - Hindari gradasi mencolok, bayangan tebal (_heavy drop-shadow_), glassmorphism berlebihan, atau animasi dekoratif yang mengganggu pembacaan data.
+    - Hindari gradasi mencolok, bayangan tebal (_heavy drop-shadow_), glassmorphism berlebihan, animasi dekoratif, maupun **pill/badge ber-background warna (_tinted pill badge_)** yang terkesan ramai atau generik.
+    - Untuk label kategori, _eyebrow text_, atau status, gunakan **tipografi bersih atau titik indikator (_status dot_) + teks** tanpa kotak/background pill.
 2. **Data-First Sports Science Ergonomics**
     - Angka biometrik (`RHR`, `HRR`, `SpO₂`, `CMJ`, `ACWR`, `Fatigue Index`, `Readiness`) adalah fokus utama — tampilkan dengan kontras tinggi, satuan jelas (`bpm`, `%`, `cm`, `AU`), dan konteks baseline.
     - Warna semantik (hijau/kuning/merah) **hanya** digunakan untuk status fisiologis/risiko kelelahan, bukan sebagai hiasan tombol atau latar belakang umum.
@@ -52,14 +53,16 @@ Seluruh token warna menggunakan ruang warna `oklch(...)` (selaras dengan Tailwin
 
 ### 2.2. Warna Semantik Status Sports Science
 
-Digunakan secara konsisten untuk klasifikasi **ACWR**, **Fatigue Index**, **Readiness Classification**, **Penurunan CMJ**, dan **Risk Detection System**:
+Digunakan secara konsisten untuk klasifikasi **ACWR**, **Fatigue Index**, **Readiness Classification**, **Penurunan CMJ**, dan **Risk Detection System**.
 
-| Status / Zona                 | Arti Domain                                                                   | Gaya Badge Minimalis (Light / Dark)                                              |
-| ----------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Optimal / Ready**           | Kesiapan tinggi, beban latihan di _sweet spot_, pemulihan baik                | `bg-emerald-500/10 text-emerald-700 border-emerald-500/20 dark:text-emerald-400` |
-| **Caution / Moderate**        | Kelelahan moderat, _undertraining_, atau perlu pemantauan ketat               | `bg-amber-500/10 text-amber-700 border-amber-500/20 dark:text-amber-400`         |
-| **High Risk / Acute Fatigue** | Penurunan CMJ ≥ 10% dari baseline, ACWR zona risiko tinggi, SpO₂/HRR abnormal | `bg-rose-500/10 text-rose-700 border-rose-500/20 dark:text-rose-400`             |
-| **Baseline / Info**           | Data acuan (Minggu-0), catatan protokol, status netral informatif             | `bg-sky-500/10 text-sky-700 border-sky-500/20 dark:text-sky-400`                 |
+> **Aturan Tanpa Background Badge**: Dilarang membungkus label status atau kategori dengan kotak/pill ber-background warna (seperti `bg-sky-500/10 border-sky-500/20 rounded-full`). Gunakan pola **status dot (`size-1.5 rounded-full`) + teks semantik bersih** tanpa background.
+
+| Status / Zona                 | Arti Domain                                                                   | Gaya Indikator Minimalis (Dot + Teks, Tanpa Background)              |
+| ----------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Optimal / Ready**           | Kesiapan tinggi, beban latihan di _sweet spot_, pemulihan baik                | Dot `bg-emerald-500` + teks `text-emerald-700 dark:text-emerald-400` |
+| **Caution / Moderate**        | Kelelahan moderat, _undertraining_, atau perlu pemantauan ketat               | Dot `bg-amber-500` + teks `text-amber-700 dark:text-amber-400`       |
+| **High Risk / Acute Fatigue** | Penurunan CMJ ≥ 10% dari baseline, ACWR zona risiko tinggi, SpO₂/HRR abnormal | Dot `bg-rose-500` + teks `text-rose-700 dark:text-rose-400`          |
+| **Baseline / Info**           | Data acuan (Minggu-0), catatan protokol, status netral informatif             | Dot `bg-sky-500` + teks `text-sky-700 dark:text-sky-400`             |
 
 > **Aturan Aksesibilitas Status**: Status risiko **tidak boleh** hanya mengandalkan warna — selalu kombinasikan warna dengan label teks jelas (mis. `Optimal`, `Waspada`, `Risiko Tinggi`) dan/atau ikon ringkas.
 

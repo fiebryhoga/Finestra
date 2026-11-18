@@ -30,22 +30,35 @@ export default function NotFound({ status = 404 }: Props) {
             <div className="relative flex min-h-dvh flex-col bg-background text-foreground">
                 <header className="border-b border-border/60 bg-background/80 backdrop-blur-sm">
                     <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6">
-                        <Link
-                            href={home()}
-                            className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90"
-                        >
-                            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                                <AppLogoIcon className="size-4" />
-                            </div>
-                            <div className="flex flex-col leading-tight">
-                                <span className="text-sm font-semibold tracking-tight text-foreground">
-                                    {name}
+                        <div className="flex items-center gap-3.5">
+                            <Link
+                                href={home()}
+                                className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90"
+                            >
+                                <AppLogoIcon className="size-8 shrink-0" />
+                                <div className="flex flex-col leading-tight">
+                                    <span className="text-sm font-semibold tracking-tight text-foreground">
+                                        {name}
+                                    </span>
+                                    <span className="text-[11px] text-muted-foreground">
+                                        Sports Science
+                                    </span>
+                                </div>
+                            </Link>
+
+                            <div className="h-6 w-px bg-border" />
+
+                            <div className="inline-flex items-center gap-2">
+                                <img
+                                    src="/assets/unesa.webp"
+                                    alt="Logo Universitas Negeri Surabaya"
+                                    className="size-7 shrink-0 object-contain"
+                                />
+                                <span className="hidden text-xs font-medium text-muted-foreground sm:inline">
+                                    FIKK UNESA
                                 </span>
-                                <span className="text-[11px] text-muted-foreground">
-                                    Sports Science
-                                </span>
                             </div>
-                        </Link>
+                        </div>
 
                         <ThemeToggle />
                     </div>
@@ -85,12 +98,11 @@ export default function NotFound({ status = 404 }: Props) {
                             </svg>
                         </div>
 
-                        <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700 dark:text-sky-400">
-                            <span className="size-1.5 rounded-full bg-sky-500 dark:bg-sky-400" />
+                        <p className="text-xs font-medium tracking-wide text-muted-foreground">
                             Sinyal Rute Tidak Ditemukan
-                        </div>
+                        </p>
 
-                        <p className="mt-5 text-6xl font-semibold tracking-tight text-foreground tabular-nums sm:text-7xl">
+                        <p className="mt-4 text-6xl font-semibold tracking-tight text-foreground tabular-nums sm:text-7xl">
                             {status}
                         </p>
 

@@ -23,7 +23,8 @@ const showcaseSlides = [
         metricValue: '1.14',
         metricUnit: 'ratio',
         status: 'Optimal',
-        statusClass: 'border-emerald-400/30 bg-emerald-400/15 text-emerald-200',
+        dotClass: 'bg-emerald-400',
+        statusTextClass: 'text-emerald-300',
     },
     {
         id: 'physiological',
@@ -38,7 +39,8 @@ const showcaseSlides = [
         metricValue: '54',
         metricUnit: 'bpm · 98%',
         status: 'Stabil',
-        statusClass: 'border-sky-400/30 bg-sky-400/15 text-sky-200',
+        dotClass: 'bg-sky-400',
+        statusTextClass: 'text-sky-300',
     },
     {
         id: 'neuromuscular',
@@ -53,7 +55,8 @@ const showcaseSlides = [
         metricValue: '42.8',
         metricUnit: 'cm (-1.8%)',
         status: 'Terkendali',
-        statusClass: 'border-emerald-400/30 bg-emerald-400/15 text-emerald-200',
+        dotClass: 'bg-emerald-400',
+        statusTextClass: 'text-emerald-300',
     },
     {
         id: 'readiness',
@@ -68,7 +71,8 @@ const showcaseSlides = [
         metricValue: '86',
         metricUnit: '/ 100',
         status: 'Siap Latih',
-        statusClass: 'border-sky-400/30 bg-sky-400/15 text-sky-200',
+        dotClass: 'bg-sky-400',
+        statusTextClass: 'text-sky-300',
     },
 ];
 
@@ -121,16 +125,14 @@ export default function AuthSplitLayout({
                     <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.12_0.04_258)]/85 via-[oklch(0.14_0.042_258)]/40 to-[oklch(0.11_0.038_258)]/95" />
                 </div>
 
-                <div className="relative z-10 flex items-center justify-between">
+                <div className="relative z-10 flex items-center justify-between gap-4">
                     <Link
                         href={home()}
                         className="inline-flex items-center gap-3 text-white transition-opacity hover:opacity-90"
                     >
-                        <div className="flex size-9 items-center justify-center rounded-lg border border-white/20 bg-white/10 backdrop-blur-md">
-                            <AppLogoIcon className="size-5 text-sky-300" />
-                        </div>
+                        <AppLogoIcon inverted className="size-10 shrink-0" />
                         <div className="flex flex-col">
-                            <span className="text-base font-semibold tracking-tight">
+                            <span className="text-lg font-semibold tracking-tight">
                                 {name}
                             </span>
                             <span className="text-xs text-slate-200/80">
@@ -139,10 +141,21 @@ export default function AuthSplitLayout({
                         </div>
                     </Link>
 
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-slate-100 backdrop-blur-md">
-                        <span className="size-1.5 rounded-full bg-sky-300" />
-                        Sports Science Lab
-                    </span>
+                    <div className="flex items-center gap-2.5 text-right">
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-xs font-semibold text-white">
+                                UNESA
+                            </span>
+                            <span className="text-[11px] text-slate-300/80">
+                                FIKK · Sport Science
+                            </span>
+                        </div>
+                        <img
+                            src="/assets/unesa.webp"
+                            alt="Logo Universitas Negeri Surabaya"
+                            className="size-10 shrink-0 object-contain"
+                        />
+                    </div>
                 </div>
 
                 <div className="relative z-10 mt-auto max-w-xl space-y-6 pt-12">
@@ -150,8 +163,8 @@ export default function AuthSplitLayout({
                         key={currentSlide.id}
                         className="animate-in space-y-4 duration-500 fade-in"
                     >
-                        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-sky-200 backdrop-blur-md">
-                            <CurrentIcon className="size-3.5 text-sky-300" />
+                        <div className="inline-flex items-center gap-2 text-xs font-medium text-sky-300">
+                            <CurrentIcon className="size-3.5" />
                             <span>{currentSlide.category}</span>
                         </div>
 
@@ -182,10 +195,16 @@ export default function AuthSplitLayout({
 
                             <span
                                 className={cn(
-                                    'rounded-full border px-2.5 py-0.5 text-xs font-medium',
-                                    currentSlide.statusClass,
+                                    'inline-flex items-center gap-1.5 text-xs font-medium',
+                                    currentSlide.statusTextClass,
                                 )}
                             >
+                                <span
+                                    className={cn(
+                                        'size-1.5 rounded-full',
+                                        currentSlide.dotClass,
+                                    )}
+                                />
                                 {currentSlide.status}
                             </span>
                         </div>
@@ -220,7 +239,7 @@ export default function AuthSplitLayout({
                         </div>
 
                         <span className="text-xs text-slate-300/80">
-                            Finestra · Sport Science
+                            Universitas Negeri Surabaya · Finestra
                         </span>
                     </div>
                 </div>
@@ -233,22 +252,28 @@ export default function AuthSplitLayout({
 
                 <div className="mx-auto flex w-full max-w-[380px] flex-col gap-8">
                     <div className="flex flex-col gap-6">
-                        <Link
-                            href={home()}
-                            className="inline-flex items-center gap-2.5 self-start lg:hidden"
-                        >
-                            <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                                <AppLogoIcon className="size-5" />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-base font-semibold tracking-tight text-foreground">
-                                    {name}
-                                </span>
-                                <span className="text-xs text-muted-foreground">
-                                    Physiological &amp; Neuromuscular Tracking
-                                </span>
-                            </div>
-                        </Link>
+                        <div className="flex items-center justify-between gap-4 lg:hidden">
+                            <Link
+                                href={home()}
+                                className="inline-flex items-center gap-2.5"
+                            >
+                                <AppLogoIcon className="size-9 shrink-0" />
+                                <div className="flex flex-col leading-tight">
+                                    <span className="text-base font-semibold tracking-tight text-foreground">
+                                        {name}
+                                    </span>
+                                    <span className="text-xs text-muted-foreground">
+                                        Sports Science
+                                    </span>
+                                </div>
+                            </Link>
+
+                            <img
+                                src="/assets/unesa.webp"
+                                alt="Logo Universitas Negeri Surabaya"
+                                className="size-9 shrink-0 object-contain"
+                            />
+                        </div>
 
                         <div className="space-y-1.5">
                             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
