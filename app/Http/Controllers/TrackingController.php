@@ -499,7 +499,7 @@ class TrackingController extends Controller
             'summary' => $summary,
             'insights' => $insights,
             'metrics' => $metricsData,
-            'generated_at' => Carbon::now()->translatedFormat('d M Y, H:i'),
+            'generated_at' => Carbon::now('Asia/Jakarta')->translatedFormat('d M Y, H:i').' WIB',
         ];
 
         $filename = 'phynestra-quick-recovery-'.Str::slug($athlete->name).'.pdf';

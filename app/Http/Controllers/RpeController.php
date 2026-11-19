@@ -429,7 +429,7 @@ class RpeController extends Controller
             'insights' => $insights,
             'weekly_summaries' => array_reverse($weeklyChronological),
             'recent_sessions' => $recentSessionsData,
-            'generated_at' => Carbon::now()->translatedFormat('d M Y, H:i'),
+            'generated_at' => Carbon::now('Asia/Jakarta')->translatedFormat('d M Y, H:i').' WIB',
         ];
 
         $filename = 'phynestra-rpe-acwr-'.Str::slug($athlete->name).'.pdf';

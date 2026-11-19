@@ -67,7 +67,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();
-    const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
+    const { isCurrentOrParentUrl, whenCurrentUrl } = useCurrentUrl();
 
     return (
         <>
@@ -158,6 +158,8 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                                 whenCurrentUrl(
                                                     item.href,
                                                     activeItemStyles,
+                                                    undefined,
+                                                    true,
                                                 ),
                                                 'h-9 cursor-pointer px-3',
                                             )}
@@ -167,7 +169,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                             )}
                                             {item.title}
                                         </Link>
-                                        {isCurrentUrl(item.href) && (
+                                        {isCurrentOrParentUrl(item.href) && (
                                             <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
                                         )}
                                     </NavigationMenuItem>

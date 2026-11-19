@@ -101,7 +101,7 @@ function VerticalBarValueLabel({ x, y, width, value }: CustomLabelProps) {
         <text
             x={cx}
             y={cy}
-            fill="#d97706"
+            fill="#2563eb"
             fontSize={8.5}
             fontWeight={600}
             textAnchor="start"
@@ -139,7 +139,7 @@ function VerticalDailyBarLabel({ x, y, width, value }: CustomLabelProps) {
     );
 }
 
-function VerticalAcwrPointLabel({ x, y, value }: CustomLabelProps) {
+function VerticalAcwrLineLabel({ x, y, value }: CustomLabelProps) {
     const num = Number(value ?? 0);
 
     if (!Number.isFinite(num) || num <= 0) {
@@ -147,6 +147,32 @@ function VerticalAcwrPointLabel({ x, y, value }: CustomLabelProps) {
     }
 
     // Offset 7px to the right of point and slightly higher to prevent collision with Bar labels
+    const cx = Number(x ?? 0) + 7;
+    const cy = Number(y ?? 0) - 10;
+
+    return (
+        <text
+            x={cx}
+            y={cy}
+            fill="#ea580c"
+            fontSize={9}
+            fontWeight={700}
+            textAnchor="start"
+            dominantBaseline="central"
+            transform={`rotate(-90, ${cx}, ${cy})`}
+        >
+            {num.toFixed(2)}
+        </text>
+    );
+}
+
+function VerticalAcwrAreaLabel({ x, y, value }: CustomLabelProps) {
+    const num = Number(value ?? 0);
+
+    if (!Number.isFinite(num) || num <= 0) {
+        return null;
+    }
+
     const cx = Number(x ?? 0) + 7;
     const cy = Number(y ?? 0) - 10;
 
@@ -212,7 +238,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                         </div>
                         <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
                             <span className="inline-flex items-center gap-1.5">
-                                <span className="size-2 rounded-full bg-[#d97706]" />
+                                <span className="size-2 rounded-full bg-[#2563eb]" />
                                 Acute (AU)
                             </span>
                             <span className="inline-flex items-center gap-1.5">
@@ -220,7 +246,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                 Chronic 4W
                             </span>
                             <span className="inline-flex items-center gap-1.5">
-                                <span className="inline-block h-0.5 w-3 rounded-full bg-[#1d4ed8]" />
+                                <span className="inline-block h-0.5 w-3 rounded-full bg-[#ea580c]" />
                                 ACWR
                             </span>
                             <span className="inline-flex items-center gap-1.5 text-rose-600 dark:text-rose-400">
@@ -369,7 +395,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                             yAxisId="left"
                                             dataKey="acute_load"
                                             name="Acute (AU)"
-                                            fill="#d97706"
+                                            fill="#2563eb"
                                             radius={[4, 4, 0, 0]}
                                             maxBarSize={32}
                                         >
@@ -400,19 +426,19 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                             type="monotone"
                                             dataKey="acwr"
                                             name="ACWR"
-                                            stroke="#1d4ed8"
+                                            stroke="#ea580c"
                                             strokeWidth={2.5}
                                             dot={{
                                                 r: 4,
                                                 fill: '#ffffff',
-                                                stroke: '#1d4ed8',
+                                                stroke: '#ea580c',
                                                 strokeWidth: 2,
                                             }}
                                             activeDot={{ r: 6 }}
                                         >
                                             <LabelList
                                                 dataKey="acwr"
-                                                content={VerticalAcwrPointLabel}
+                                                content={VerticalAcwrLineLabel}
                                             />
                                         </Line>
                                     </ComposedChart>
@@ -563,7 +589,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                         >
                                             <LabelList
                                                 dataKey="acwr"
-                                                content={VerticalAcwrPointLabel}
+                                                content={VerticalAcwrAreaLabel}
                                             />
                                         </Area>
                                     </AreaChart>

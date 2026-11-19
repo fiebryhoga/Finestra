@@ -1,4 +1,17 @@
-import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import {
+    Circle,
+    Document,
+    G,
+    Line,
+    Page,
+    Path,
+    Polyline,
+    Rect,
+    StyleSheet,
+    Svg,
+    Text,
+    View,
+} from '@react-pdf/renderer';
 import type { QuickRecoveryReportData } from './types';
 
 const styles = StyleSheet.create({
@@ -43,18 +56,6 @@ const styles = StyleSheet.create({
     headerDate: {
         fontSize: 7.5,
         color: '#475569',
-    },
-    badgeOfficial: {
-        marginTop: 3,
-        fontSize: 7,
-        fontWeight: 'bold',
-        color: '#059669',
-        backgroundColor: '#ecfdf5',
-        borderWidth: 0.5,
-        borderColor: '#a7f3d0',
-        paddingHorizontal: 5,
-        paddingVertical: 1.5,
-        borderRadius: 3,
     },
     sectionTitle: {
         fontSize: 8.5,
@@ -121,6 +122,50 @@ const styles = StyleSheet.create({
     summaryUnit: {
         fontSize: 7,
         color: '#64748b',
+    },
+    // Chart Vector Card
+    chartCard: {
+        borderWidth: 0.5,
+        borderColor: '#cbd5e1',
+        borderRadius: 4,
+        backgroundColor: '#f8fafc',
+        padding: 8,
+        marginBottom: 8,
+    },
+    chartHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        marginBottom: 6,
+    },
+    chartTitle: {
+        fontSize: 8,
+        fontWeight: 'bold',
+        color: '#132e57',
+    },
+    chartSubtitle: {
+        fontSize: 6.5,
+        color: '#64748b',
+        marginTop: 1.5,
+    },
+    legendRow: {
+        flexDirection: 'row',
+        gap: 8,
+        alignItems: 'center',
+    },
+    legendItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 3,
+    },
+    legendText: {
+        fontSize: 6.5,
+        color: '#475569',
+    },
+    legendDot: {
+        width: 5,
+        height: 5,
+        borderRadius: 2.5,
     },
     // Insights
     insightsRow: {
@@ -246,6 +291,272 @@ function getInsightBorderColor(level: string): string {
     }
 }
 
+function QuickRecoveryChart({
+    metrics,
+}: {
+    metrics: QuickRecoveryReportData['metrics'];
+}) {
+    const data = [...metrics]
+        .reverse()
+        .filter(
+            (m) => m.status_code !== 'empty' && m.quick_recovery_score !== null,
+        );
+
+    if (data.length === 0) {
+        return (
+            <View style={styles.chartCard}>
+                <Text
+                    style={{
+                        color: '#64748b',
+                        fontSize: 7,
+                        textAlign: 'center',
+                        paddingVertical: 14,
+                    }}
+                >
+                    Belum ada data skor pemulihan untuk divisualisasikan sebagai
+                    grafik.
+                </Text>
+            </View>
+        );
+    }
+
+    const width = 531;
+    const height = 150;
+    const marginLeft = 32;
+    const marginRight = 16;
+    const marginTop = 14;
+    const marginBottom = 28;
+    const plotWidth = width - marginLeft - marginRight;
+    const plotHeight = height - marginTop - marginBottom;
+    const plotBottom = marginTop + plotHeight;
+    const plotLeft = marginLeft;
+    const plotRight = marginLeft + plotWidth;
+
+    const yTicks = [0, 25, 50, 75, 100];
+    const yOpt = plotBottom - (75 / 100) * plotHeight;
+    const yPoor = plotBottom - (35 / 100) * plotHeight;
+
+    const N = data.length;
+    const points: { cx: number; cy: number; qrs: number; date: string }[] = [];
+
+    data.forEach((m, i) => {
+        const cx =
+            N === 1
+                ? plotLeft + plotWidth / 2
+                : plotLeft + (i / (N - 1)) * plotWidth;
+        const cy =
+            plotBottom - ((m.quick_recovery_score ?? 0) / 100) * plotHeight;
+        points.push({
+            cx,
+            cy,
+            qrs: m.quick_recovery_score ?? 0,
+            date: m.record_date,
+        });
+    });
+
+    const xLabelIndices: number[] = [];
+    const numLabels = Math.min(8, N);
+    const step = (N - 1) / Math.max(1, numLabels - 1);
+    for (let i = 0; i < numLabels; i++) {
+        xLabelIndices.push(Math.round(i * step));
+    }
+
+    const areaD =
+        points.length > 1
+            ? `M ${points[0].cx} ${plotBottom} ` +
+              points.map((p) => `L ${p.cx} ${p.cy}`).join(' ') +
+              ` L ${points[points.length - 1].cx} ${plotBottom} Z`
+            : '';
+
+    return (
+        <View wrap={false} style={styles.chartCard}>
+            <View style={styles.chartHeader}>
+                <View>
+                    <Text style={styles.chartTitle}>
+                        TREN QUICK RECOVERY SCORE (QRS)
+                    </Text>
+                    <Text style={styles.chartSubtitle}>
+                        Skala 0–100% dengan ambang zona optimal (75%) dan batas
+                        pemulihan rendah (35%)
+                    </Text>
+                </View>
+                <View style={styles.legendRow}>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#10b981' },
+                            ]}
+                        />
+                        <Text style={styles.legendText}>
+                            Optimal (&gt;= 75%)
+                        </Text>
+                    </View>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#f43f5e' },
+                            ]}
+                        />
+                        <Text style={[styles.legendText, { color: '#e11d48' }]}>
+                            Kurang (&lt; 35%)
+                        </Text>
+                    </View>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#1d4ed8' },
+                            ]}
+                        />
+                        <Text style={styles.legendText}>QRS</Text>
+                    </View>
+                </View>
+            </View>
+
+            <Svg
+                width={width}
+                height={height}
+                viewBox={`0 0 ${width} ${height}`}
+            >
+                {/* Shaded Optimal Zone (>= 75%) */}
+                <Rect
+                    x={plotLeft}
+                    y={marginTop}
+                    width={plotWidth}
+                    height={yOpt - marginTop}
+                    fill="#10b981"
+                    fillOpacity={0.08}
+                />
+
+                {/* Horizontal Grid lines */}
+                {yTicks.map((val, idx) => {
+                    const y = plotBottom - (val / 100) * plotHeight;
+                    return (
+                        <G key={`qrs-grid-${idx}`}>
+                            <Line
+                                x1={plotLeft}
+                                y1={y}
+                                x2={plotRight}
+                                y2={y}
+                                stroke="#e2e8f0"
+                                strokeDasharray="2 2"
+                                strokeWidth={0.5}
+                            />
+                            <Text
+                                x={plotLeft - 5}
+                                y={y + 2.5}
+                                style={{
+                                    fontSize: 6.5,
+                                    fill: '#64748b',
+                                    textAnchor: 'end',
+                                }}
+                            >
+                                {val}%
+                            </Text>
+                        </G>
+                    );
+                })}
+
+                {/* Reference Threshold Lines */}
+                <Line
+                    x1={plotLeft}
+                    y1={yOpt}
+                    x2={plotRight}
+                    y2={yOpt}
+                    stroke="#10b981"
+                    strokeDasharray="4 3"
+                    strokeWidth={0.8}
+                />
+                <Line
+                    x1={plotLeft}
+                    y1={yPoor}
+                    x2={plotRight}
+                    y2={yPoor}
+                    stroke="#f43f5e"
+                    strokeDasharray="4 3"
+                    strokeWidth={0.8}
+                />
+
+                {/* Blue Area Fill under QRS line */}
+                {points.length > 1 && (
+                    <Path d={areaD} fill="#1d4ed8" fillOpacity={0.12} />
+                )}
+
+                {/* QRS Trend Line */}
+                {points.length > 1 && (
+                    <Polyline
+                        points={points.map((p) => `${p.cx},${p.cy}`).join(' ')}
+                        stroke="#1d4ed8"
+                        strokeWidth={1.8}
+                        fill="none"
+                    />
+                )}
+
+                {/* Point Dots & Vertical Values if <= 35 points */}
+                {points.map((p, i) => {
+                    const showValue = N <= 25 || (N <= 40 && i % 2 === 0);
+                    return (
+                        <G key={`qrs-pt-${i}`}>
+                            <Circle
+                                cx={p.cx}
+                                cy={p.cy}
+                                r={2.2}
+                                fill="#ffffff"
+                                stroke="#1d4ed8"
+                                strokeWidth={1.2}
+                            />
+                            {showValue && (
+                                <G
+                                    transform={`rotate(-90 ${p.cx} ${p.cy - 4})`}
+                                >
+                                    <Text
+                                        x={p.cx}
+                                        y={p.cy - 4}
+                                        style={{
+                                            fontSize: 5.5,
+                                            fill: '#1d4ed8',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        {Math.round(p.qrs)}%
+                                    </Text>
+                                </G>
+                            )}
+                        </G>
+                    );
+                })}
+
+                {/* Sampled X Axis Date Labels */}
+                {xLabelIndices.map((idx) => {
+                    const p = points[idx];
+                    if (!p) return null;
+                    const shortDate = p.date.replace(/\s+\d{4}$/, '');
+                    return (
+                        <G
+                            key={`x-lbl-${idx}`}
+                            transform={`rotate(-90 ${p.cx} ${plotBottom + 6})`}
+                        >
+                            <Text
+                                x={p.cx}
+                                y={plotBottom + 6}
+                                style={{
+                                    fontSize: 6,
+                                    fill: '#64748b',
+                                    textAnchor: 'end',
+                                }}
+                            >
+                                {shortDate}
+                            </Text>
+                        </G>
+                    );
+                })}
+            </Svg>
+        </View>
+    );
+}
+
 export function QuickRecoveryPdfDocument({
     data,
 }: {
@@ -278,7 +589,6 @@ export function QuickRecoveryPdfDocument({
                         <Text style={styles.headerDate}>
                             Dicetak: {generated_at}
                         </Text>
-                        <Text style={styles.badgeOfficial}>DOKUMEN RESMI</Text>
                     </View>
                 </View>
 
@@ -418,6 +728,9 @@ export function QuickRecoveryPdfDocument({
                         </Text>
                     </View>
                 </View>
+
+                {/* Quick Recovery Score Vector Chart */}
+                <QuickRecoveryChart metrics={metrics} />
 
                 {/* Automated Clinical Insights */}
                 {insights.length > 0 && (

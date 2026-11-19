@@ -17,6 +17,7 @@ export type WhenCurrentUrlFn = <TIfTrue, TIfFalse = null>(
     urlToCheck: NonNullable<InertiaLinkProps['href']>,
     ifTrue: TIfTrue,
     ifFalse?: TIfFalse,
+    startsWith?: boolean,
 ) => TIfTrue | TIfFalse;
 
 export type UseCurrentUrlReturn = {
@@ -40,23 +41,45 @@ export function useCurrentUrl(): UseCurrentUrlReturn {
         currentUrl?: string,
         startsWith: boolean = false,
     ) => {
-        const urlToCompare = currentUrl ?? currentUrlPath;
+        const rawUrlToCompare = currentUrl ?? currentUrlPath;
+        let urlToCompare = rawUrlToCompare;
+        try {
+            urlToCompare = new URL(rawUrlToCompare, 'http://localhost')
+                .pathname;
+        } catch {
+            urlToCompare = rawUrlToCompare;
+        }
+
         const urlString = toUrl(urlToCheck);
 
-        const comparePath = (path: string): boolean =>
-            startsWith ? urlToCompare.startsWith(path) : path === urlToCompare;
-
-        if (!urlString.startsWith('http')) {
-            return comparePath(urlString);
-        }
-
+        let targetPath = urlString;
         try {
-            const absoluteUrl = new URL(urlString);
-
-            return comparePath(absoluteUrl.pathname);
+            targetPath = new URL(urlString, 'http://localhost').pathname;
         } catch {
-            return false;
+            targetPath = urlString;
         }
+
+        const comparePath = (path: string): boolean => {
+            const cleanPath =
+                path.length > 1 && path.endsWith('/')
+                    ? path.slice(0, -1)
+                    : path;
+            const cleanCompare =
+                urlToCompare.length > 1 && urlToCompare.endsWith('/')
+                    ? urlToCompare.slice(0, -1)
+                    : urlToCompare;
+
+            if (!startsWith || cleanPath === '/') {
+                return cleanCompare === cleanPath;
+            }
+
+            return (
+                cleanCompare === cleanPath ||
+                cleanCompare.startsWith(`${cleanPath}/`)
+            );
+        };
+
+        return comparePath(targetPath);
     };
 
     const isCurrentOrParentUrl: IsCurrentOrParentUrlFn = (
@@ -70,8 +93,11 @@ export function useCurrentUrl(): UseCurrentUrlReturn {
         urlToCheck: NonNullable<InertiaLinkProps['href']>,
         ifTrue: TIfTrue,
         ifFalse: TIfFalse = null as TIfFalse,
+        startsWith: boolean = false,
     ): TIfTrue | TIfFalse => {
-        return isCurrentUrl(urlToCheck) ? ifTrue : ifFalse;
+        return isCurrentUrl(urlToCheck, undefined, startsWith)
+            ? ifTrue
+            : ifFalse;
     };
 
     return {
