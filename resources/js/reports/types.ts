@@ -47,6 +47,14 @@ export type QuickRecoveryReportData = {
     generated_at: string;
 };
 
+export type DailyLoadItem = {
+    date: string;
+    date_label: string;
+    day_short: string;
+    daily_load: number;
+    session_count: number;
+};
+
 export type RpeWeeklyReportData = {
     athlete: {
         name: string;
@@ -85,6 +93,7 @@ export type RpeWeeklyReportData = {
         zone: string;
         zone_label: string;
     }>;
+    daily_loads?: DailyLoadItem[];
     recent_sessions: Array<{
         session_date: string;
         session_type_label: string;

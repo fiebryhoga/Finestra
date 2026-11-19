@@ -101,7 +101,7 @@ function VerticalBarValueLabel({ x, y, width, value }: CustomLabelProps) {
         <text
             x={cx}
             y={cy}
-            fill="#2563eb"
+            fill="#132e57"
             fontSize={8.5}
             fontWeight={600}
             textAnchor="start"
@@ -127,9 +127,9 @@ function VerticalDailyBarLabel({ x, y, width, value }: CustomLabelProps) {
         <text
             x={cx}
             y={cy}
-            fill="var(--muted-foreground)"
+            fill="#132e57"
             fontSize={9}
-            fontWeight={500}
+            fontWeight={600}
             textAnchor="start"
             dominantBaseline="central"
             transform={`rotate(-90, ${cx}, ${cy})`}
@@ -238,12 +238,12 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                         </div>
                         <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
                             <span className="inline-flex items-center gap-1.5">
-                                <span className="size-2 rounded-full bg-[#2563eb]" />
-                                Acute (AU)
+                                <span className="size-2 rounded-full bg-[#0d9488]" />
+                                Chronic 4W
                             </span>
                             <span className="inline-flex items-center gap-1.5">
-                                <span className="inline-block h-0.5 w-3 rounded-full bg-[#0d9488]" />
-                                Chronic 4W
+                                <span className="size-2 rounded-full bg-[#132e57]" />
+                                Acute (AU)
                             </span>
                             <span className="inline-flex items-center gap-1.5">
                                 <span className="inline-block h-0.5 w-3 rounded-full bg-[#ea580c]" />
@@ -311,7 +311,9 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                             width={44}
                                             tickFormatter={(val: number) =>
                                                 val >= 1000
-                                                    ? `${(val / 1000).toFixed(1)}k`
+                                                    ? val % 1000 === 0
+                                                        ? `${val / 1000}k`
+                                                        : `${(val / 1000).toFixed(1)}k`
                                                     : String(val)
                                             }
                                         />
@@ -390,12 +392,21 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                             strokeOpacity={0.45}
                                         />
 
-                                        {/* Acute Load (AU) Bar */}
+                                        {/* Stacked Bars: Chronic Load (Bottom, Teal) + Acute Load (Top, Navy) */}
+                                        <Bar
+                                            yAxisId="left"
+                                            dataKey="chronic_load"
+                                            name="Chronic 4W"
+                                            stackId="load"
+                                            fill="#0d9488"
+                                            maxBarSize={32}
+                                        />
                                         <Bar
                                             yAxisId="left"
                                             dataKey="acute_load"
                                             name="Acute (AU)"
-                                            fill="#2563eb"
+                                            stackId="load"
+                                            fill="#132e57"
                                             radius={[4, 4, 0, 0]}
                                             maxBarSize={32}
                                         >
@@ -404,21 +415,6 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                                 content={VerticalBarValueLabel}
                                             />
                                         </Bar>
-
-                                        {/* Chronic Load (4W) Line - Solid line (no dash) to avoid clashing with boundary lines */}
-                                        <Line
-                                            yAxisId="left"
-                                            type="monotone"
-                                            dataKey="chronic_load"
-                                            name="Chronic 4W"
-                                            stroke="#0d9488"
-                                            strokeWidth={2.5}
-                                            dot={{
-                                                r: 3.5,
-                                                fill: '#0d9488',
-                                            }}
-                                            activeDot={{ r: 5 }}
-                                        />
 
                                         {/* ACWR Line */}
                                         <Line
@@ -669,7 +665,9 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                             width={44}
                                             tickFormatter={(val: number) =>
                                                 val >= 1000
-                                                    ? `${(val / 1000).toFixed(1)}k`
+                                                    ? val % 1000 === 0
+                                                        ? `${val / 1000}k`
+                                                        : `${(val / 1000).toFixed(1)}k`
                                                     : String(val)
                                             }
                                         />
@@ -693,7 +691,7 @@ export function AcwrCharts({ latestWeek, weeklySummaries, dailyLoads }: Props) {
                                         <Bar
                                             dataKey="daily_load"
                                             name="Daily Load"
-                                            fill="#2563eb"
+                                            fill="#132e57"
                                             radius={[4, 4, 0, 0]}
                                             maxBarSize={32}
                                         >

@@ -399,6 +399,12 @@ class RpeController extends Controller
             ->orderBy('id')
             ->get();
 
+        $today = Carbon::today();
+        $lastSession = $sessions->last();
+        $latestSessionDate = $lastSession !== null ? $lastSession->session_date : $today;
+        $dailyEndDate = $latestSessionDate->gt($today) ? $latestSessionDate : $today;
+        $dailyLoads = $this->calculator->buildDailyLoads($sessions, $dailyEndDate, 14);
+
         $weeklyChronological = $this->calculator->buildWeeklySummaries($sessions);
         $latestWeek = $weeklyChronological !== []
             ? $weeklyChronological[count($weeklyChronological) - 1]
@@ -428,6 +434,7 @@ class RpeController extends Controller
             'latest_week' => $latestWeek,
             'insights' => $insights,
             'weekly_summaries' => array_reverse($weeklyChronological),
+            'daily_loads' => $dailyLoads,
             'recent_sessions' => $recentSessionsData,
             'generated_at' => Carbon::now('Asia/Jakarta')->translatedFormat('d M Y, H:i').' WIB',
         ];

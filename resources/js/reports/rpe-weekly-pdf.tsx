@@ -15,209 +15,235 @@ import type { RpeWeeklyReportData } from './types';
 
 const styles = StyleSheet.create({
     page: {
-        paddingTop: 24,
-        paddingBottom: 36,
+        paddingTop: 22,
+        paddingBottom: 32,
         paddingHorizontal: 24,
         fontSize: 8.5,
         fontFamily: 'Helvetica',
         color: '#0f172a',
         backgroundColor: '#ffffff',
     },
+    // Header
     header: {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1.5,
         borderBottomColor: '#132e57',
-        paddingBottom: 8,
-        marginBottom: 10,
+        paddingBottom: 6,
+        marginBottom: 8,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
     },
     brandKicker: {
-        fontSize: 7,
+        fontSize: 6.8,
         fontWeight: 'bold',
         letterSpacing: 1,
         color: '#1e4b8f',
         marginBottom: 2,
     },
     headerTitle: {
-        fontSize: 14,
+        fontSize: 13,
         fontWeight: 'bold',
         color: '#132e57',
     },
     headerSub: {
-        fontSize: 7.5,
+        fontSize: 7.2,
         color: '#475569',
-        marginTop: 2,
+        marginTop: 1.5,
     },
     headerRight: {
         alignItems: 'flex-end',
     },
     headerDate: {
-        fontSize: 7.5,
+        fontSize: 7.2,
         color: '#475569',
     },
-    sectionTitle: {
-        fontSize: 8.5,
-        fontWeight: 'bold',
-        color: '#132e57',
-        marginTop: 10,
-        marginBottom: 4,
-        letterSpacing: 0.5,
-    },
-    // Meta Table
-    metaTable: {
-        borderWidth: 0.5,
-        borderColor: '#cbd5e1',
-        marginBottom: 8,
-    },
-    metaRow: {
+    // Modern Athlete Profile (clean, borderless-feel, no heavy grid)
+    metaCard: {
         flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#cbd5e1',
-    },
-    metaCellLabel: {
-        width: '20%',
-        backgroundColor: '#f1f5f9',
-        paddingVertical: 3.5,
-        paddingHorizontal: 5,
-        fontWeight: 'bold',
-        fontSize: 7.5,
-        color: '#334155',
-    },
-    metaCellValue: {
-        width: '30%',
-        paddingVertical: 3.5,
-        paddingHorizontal: 5,
-        fontSize: 7.5,
-        color: '#0f172a',
-        borderRightWidth: 0.5,
-        borderRightColor: '#cbd5e1',
-    },
-    // Summary KPI Cards
-    summaryRow: {
-        flexDirection: 'row',
-        gap: 6,
-        marginBottom: 8,
-    },
-    summaryCard: {
-        flex: 1,
-        borderWidth: 0.5,
-        borderColor: '#cbd5e1',
-        borderTopWidth: 2.5,
-        borderTopColor: '#132e57',
         backgroundColor: '#f8fafc',
-        padding: 6,
+        borderRadius: 4,
+        borderWidth: 0.5,
+        borderColor: '#e2e8f0',
+        paddingVertical: 5.5,
+        paddingHorizontal: 10,
+        marginBottom: 8,
     },
-    summaryLabel: {
-        fontSize: 7,
-        color: '#475569',
-        marginBottom: 2,
+    metaCol: {
+        flex: 1,
     },
-    summaryValue: {
-        fontSize: 12,
+    metaLabel: {
+        fontSize: 5.8,
         fontWeight: 'bold',
-        color: '#132e57',
-    },
-    summaryUnit: {
-        fontSize: 7,
         color: '#64748b',
+        letterSpacing: 0.5,
+        marginBottom: 1.5,
     },
-    // Chart Vector Card
+    metaVal: {
+        fontSize: 7.5,
+        fontWeight: 'bold',
+        color: '#0f172a',
+    },
+    // Chart Cards & Grids
+    gridRow: {
+        flexDirection: 'row',
+        gap: 8,
+        marginBottom: 8,
+    },
     chartCard: {
         borderWidth: 0.5,
-        borderColor: '#cbd5e1',
+        borderColor: '#e2e8f0',
         borderRadius: 4,
-        backgroundColor: '#f8fafc',
-        padding: 8,
-        marginBottom: 8,
+        backgroundColor: '#ffffff',
+        padding: 6,
     },
     chartHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        marginBottom: 6,
+        marginBottom: 4,
     },
     chartTitle: {
-        fontSize: 8,
+        fontSize: 7.5,
         fontWeight: 'bold',
         color: '#132e57',
+        letterSpacing: 0.3,
     },
     chartSubtitle: {
-        fontSize: 6.5,
+        fontSize: 6.2,
         color: '#64748b',
-        marginTop: 1.5,
+        marginTop: 1,
+    },
+    chartAxisTick: {
+        fontSize: 5.8,
+        fill: '#64748b',
+    },
+    chartEmpty: {
+        fontSize: 6.8,
+        color: '#64748b',
+        textAlign: 'center',
+        paddingVertical: 30,
     },
     legendRow: {
         flexDirection: 'row',
-        gap: 8,
+        gap: 6,
         alignItems: 'center',
     },
     legendItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 3,
+        gap: 2.5,
     },
     legendText: {
-        fontSize: 6.5,
+        fontSize: 6,
         color: '#475569',
     },
     legendDot: {
-        width: 5,
-        height: 5,
-        borderRadius: 2.5,
+        width: 4.5,
+        height: 4.5,
+        borderRadius: 2.25,
     },
-    // Insights Cards
+    // Donut Gauge Specific
+    donutCard: {
+        borderWidth: 0.5,
+        borderColor: '#e2e8f0',
+        borderRadius: 4,
+        backgroundColor: '#ffffff',
+        padding: 6,
+        width: 165,
+        height: 156,
+        justifyContent: 'space-between',
+    },
+    donutHeader: {
+        marginBottom: 2,
+    },
+    donutFooter: {
+        flexDirection: 'row',
+        borderTopWidth: 0.5,
+        borderTopColor: '#f1f5f9',
+        paddingTop: 4,
+        marginTop: 2,
+    },
+    donutFooterCol: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    donutFooterDivider: {
+        width: 0.5,
+        backgroundColor: '#e2e8f0',
+        marginHorizontal: 4,
+    },
+    donutFooterLabel: {
+        fontSize: 5.5,
+        color: '#64748b',
+        marginBottom: 1,
+    },
+    donutFooterVal: {
+        fontSize: 7,
+        fontWeight: 'bold',
+        color: '#0f172a',
+    },
+    // Section Header
+    sectionTitle: {
+        fontSize: 8,
+        fontWeight: 'bold',
+        color: '#132e57',
+        marginTop: 6,
+        marginBottom: 4,
+        letterSpacing: 0.5,
+    },
+    // Insights Cards (Clean Left-Accent, No Clunky Frame)
     insightsRow: {
         flexDirection: 'row',
         gap: 6,
-        marginBottom: 8,
     },
     insightCard: {
         flex: 1,
         borderWidth: 0.5,
-        borderColor: '#cbd5e1',
-        borderTopWidth: 2.5,
+        borderColor: '#e2e8f0',
+        borderLeftWidth: 3,
+        borderRadius: 3,
         backgroundColor: '#f8fafc',
         padding: 5,
     },
     insightCat: {
-        fontSize: 6.5,
+        fontSize: 5.8,
         fontWeight: 'bold',
-        color: '#475569',
+        color: '#64748b',
         letterSpacing: 0.3,
     },
     insightVal: {
-        fontSize: 9,
+        fontSize: 8.5,
         fontWeight: 'bold',
         color: '#132e57',
-        marginVertical: 1.5,
+        marginVertical: 1,
     },
     insightTitle: {
-        fontSize: 7.5,
+        fontSize: 7,
         fontWeight: 'bold',
         color: '#0f172a',
-        marginBottom: 2,
+        marginBottom: 1.5,
     },
     insightText: {
-        fontSize: 6.8,
+        fontSize: 6.4,
         color: '#334155',
-        lineHeight: 1.3,
+        lineHeight: 1.25,
     },
-    // Tables
+    // Clean Modern Tables
     table: {
         borderWidth: 0.5,
-        borderColor: '#cbd5e1',
-        marginTop: 2,
+        borderColor: '#e2e8f0',
+        borderRadius: 3,
+        overflow: 'hidden',
+        marginTop: 3,
+        marginBottom: 8,
     },
     tableHeaderRow: {
         flexDirection: 'row',
         backgroundColor: '#132e57',
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#132e57',
-        paddingVertical: 4,
+        paddingVertical: 4.5,
     },
     tableHeaderCell: {
-        fontSize: 7,
+        fontSize: 6.8,
         fontWeight: 'bold',
         color: '#ffffff',
         paddingHorizontal: 4,
@@ -225,14 +251,14 @@ const styles = StyleSheet.create({
     tableRow: {
         flexDirection: 'row',
         borderBottomWidth: 0.5,
-        borderBottomColor: '#e2e8f0',
-        paddingVertical: 3,
+        borderBottomColor: '#f1f5f9',
+        paddingVertical: 3.5,
     },
     tableRowAlt: {
         backgroundColor: '#f8fafc',
     },
     tableCell: {
-        fontSize: 7.2,
+        fontSize: 6.8,
         color: '#0f172a',
         paddingHorizontal: 4,
     },
@@ -244,7 +270,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     zoneCaution: {
-        color: '#d97706',
+        color: '#ea580c',
         fontWeight: 'bold',
     },
     zoneRisk: {
@@ -258,22 +284,22 @@ const styles = StyleSheet.create({
     // Footer
     footer: {
         position: 'absolute',
-        bottom: 14,
+        bottom: 12,
         left: 24,
         right: 24,
         borderTopWidth: 0.5,
         borderTopColor: '#cbd5e1',
-        paddingTop: 4,
+        paddingTop: 3,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     footerBrand: {
-        fontSize: 6.8,
+        fontSize: 6.5,
         color: '#64748b',
     },
     footerPage: {
-        fontSize: 6.8,
+        fontSize: 6.5,
         color: '#64748b',
     },
 });
@@ -283,7 +309,7 @@ function getInsightBorderColor(level: string): string {
         case 'optimal':
             return '#059669';
         case 'warning':
-            return '#d97706';
+            return '#ea580c';
         case 'risk':
             return '#e11d48';
         default:
@@ -306,6 +332,133 @@ function getZoneStyle(zone: string) {
     }
 }
 
+/**
+ * 1. Donut Gauge Rasio ACWR Mingguan (Card Kiri Atas)
+ * Menampilkan lingkaran gauge proporsional 0-2.00, nilai rasio, status zona,
+ * serta metrik Acute (1W) dan Chronic (4W) di bagian bawah.
+ */
+function AcwrDonutGauge({
+    latestWeek,
+}: {
+    latestWeek: RpeWeeklyReportData['latest_week'];
+}) {
+    const acwr = latestWeek?.acwr ?? null;
+    const filled = acwr !== null ? Math.min(2.0, Math.max(0, acwr)) : 0;
+    const ratio = filled / 2.0;
+
+    let zoneColor = '#94a3b8';
+    if (acwr !== null) {
+        if (acwr < 0.8) {
+            zoneColor = '#0284c7';
+        } else if (acwr <= 1.3) {
+            zoneColor = '#10b981';
+        } else if (acwr <= 1.5) {
+            zoneColor = '#ea580c';
+        } else {
+            zoneColor = '#e11d48';
+        }
+    }
+
+    const width = 165;
+    const cx = (width - 12) / 2;
+    const cy = 40;
+    const r = 28;
+    const strokeWidth = 6.5;
+    const circumference = 2 * Math.PI * r;
+    const strokeDash = `${(ratio * circumference).toFixed(1)} ${circumference.toFixed(1)}`;
+
+    return (
+        <View style={styles.donutCard}>
+            <View style={styles.donutHeader}>
+                <Text style={styles.chartTitle}>RASIO ACWR MINGGUAN</Text>
+                <Text style={styles.chartSubtitle}>
+                    {latestWeek
+                        ? `${latestWeek.week_label} · Basis ${latestWeek.session_count > 0 ? '4' : '0'} minggu`
+                        : 'Basis 4 minggu'}
+                </Text>
+            </View>
+
+            <Svg width={width - 12} height={80}>
+                {/* Background track circle */}
+                <Circle
+                    cx={cx}
+                    cy={cy}
+                    r={r}
+                    fill="none"
+                    stroke="#f1f5f9"
+                    strokeWidth={strokeWidth}
+                />
+                {/* Progress arc starting at 12 o'clock */}
+                <Circle
+                    cx={cx}
+                    cy={cy}
+                    r={r}
+                    fill="none"
+                    stroke={zoneColor}
+                    strokeWidth={strokeWidth}
+                    strokeDasharray={strokeDash}
+                    transform={`rotate(-90 ${cx} ${cy})`}
+                />
+                {/* Centered ACWR Value */}
+                <Text
+                    x={cx}
+                    y={cy - 2}
+                    style={{
+                        fontSize: 13,
+                        fontWeight: 'bold',
+                        fill: '#0f172a',
+                        textAnchor: 'middle',
+                    }}
+                >
+                    {acwr !== null ? acwr.toFixed(2) : '-'}
+                </Text>
+                {/* Status Dot & Label */}
+                <Text
+                    x={cx}
+                    y={cy + 9.5}
+                    style={{
+                        fontSize: 6.5,
+                        fontWeight: 'bold',
+                        fill: zoneColor,
+                        textAnchor: 'middle',
+                    }}
+                >
+                    {latestWeek?.zone_label
+                        ? `• ${latestWeek.zone_label}`
+                        : '—'}
+                </Text>
+            </Svg>
+
+            <View style={styles.donutFooter}>
+                <View style={styles.donutFooterCol}>
+                    <Text style={styles.donutFooterLabel}>Acute (1W)</Text>
+                    <Text style={styles.donutFooterVal}>
+                        {latestWeek
+                            ? `${latestWeek.acute_load.toLocaleString('id-ID')} AU`
+                            : '-'}
+                    </Text>
+                </View>
+                <View style={styles.donutFooterDivider} />
+                <View style={styles.donutFooterCol}>
+                    <Text style={styles.donutFooterLabel}>
+                        Chronic (4W Avg)
+                    </Text>
+                    <Text style={styles.donutFooterVal}>
+                        {latestWeek
+                            ? `${Math.round(latestWeek.chronic_load).toLocaleString('id-ID')} AU`
+                            : '-'}
+                    </Text>
+                </View>
+            </View>
+        </View>
+    );
+}
+
+/**
+ * 2. Grafik Tren Beban Mingguan (Acute vs Chronic) & ACWR (Kanan Atas)
+ * Bar Bertumpuk: Chronic 4W (Bawah, #0d9488) + Acute (Atas, #132e57)
+ * Garis: ACWR (Oranye, #ea580c), Batas Bahaya (Merah, #f43f5e)
+ */
 function RpeAcwrChart({
     summaries,
 }: {
@@ -313,67 +466,60 @@ function RpeAcwrChart({
 }) {
     if (summaries.length === 0) {
         return (
-            <View style={styles.chartCard}>
-                <Text
-                    style={{
-                        color: '#64748b',
-                        fontSize: 7,
-                        textAlign: 'center',
-                        paddingVertical: 14,
-                    }}
-                >
-                    Belum ada riwayat beban mingguan untuk divisualisasikan
-                    sebagai grafik.
+            <View style={[styles.chartCard, { width: 362, height: 156 }]}>
+                <Text style={styles.chartEmpty}>
+                    Belum ada riwayat beban mingguan untuk divisualisasikan.
                 </Text>
             </View>
         );
     }
 
     const data = [...summaries].reverse();
-    const width = 531;
-    const height = 160;
-    const marginLeft = 36;
-    const marginRight = 32;
-    const marginTop = 16;
-    const marginBottom = 34;
+    const width = 362;
+    const height = 156;
+    const marginLeft = 28;
+    const marginRight = 22;
+    const marginTop = 10;
+    const plotHeight = 82;
+    const plotBottom = marginTop + plotHeight; // 92
     const plotWidth = width - marginLeft - marginRight;
-    const plotHeight = height - marginTop - marginBottom;
-    const plotBottom = marginTop + plotHeight;
     const plotLeft = marginLeft;
     const plotRight = marginLeft + plotWidth;
 
-    const maxAu = Math.max(
-        6000,
-        ...data.map((d) => Math.max(d.acute_load || 0, d.chronic_load || 0)),
+    const maxStackedAu = Math.max(
+        8000,
+        ...data.map((d) => (d.acute_load || 0) + (d.chronic_load || 0)),
     );
+    const maxAu = Math.ceil(maxStackedAu / 2000) * 2000;
     const maxAcwr = 2.0;
 
-    const auTicks = [0, 1500, 3000, 4500, 6000];
+    const auTicks = [0, 0.25, 0.5, 0.75, 1.0].map((r) =>
+        Math.round(r * maxAu),
+    );
     const acwrTicks = [0, 0.5, 1.0, 1.5, 2.0];
 
     const ySweetTop = plotBottom - (1.3 / maxAcwr) * plotHeight;
     const ySweetBottom = plotBottom - (0.8 / maxAcwr) * plotHeight;
     const yDanger = plotBottom - (1.5 / maxAcwr) * plotHeight;
-    const yOptHigh = plotBottom - (1.3 / maxAcwr) * plotHeight;
-    const yOptLow = plotBottom - (0.8 / maxAcwr) * plotHeight;
 
     const N = data.length;
     const stepWidth = N > 0 ? plotWidth / N : plotWidth;
-    const barWidth = Math.min(20, Math.max(8, stepWidth * 0.6));
+    const barWidth = Math.min(14, Math.max(6, stepWidth * 0.55));
 
-    const chronicPoints: { cx: number; cy: number }[] = [];
     const acwrPoints: { cx: number; cy: number; val: number }[] = [];
 
     return (
-        <View wrap={false} style={styles.chartCard}>
+        <View
+            wrap={false}
+            style={[styles.chartCard, { width: 362, height: 156 }]}
+        >
             <View style={styles.chartHeader}>
                 <View>
                     <Text style={styles.chartTitle}>
                         TREN BEBAN MINGGUAN (ACUTE VS CHRONIC) &amp; ACWR
                     </Text>
                     <Text style={styles.chartSubtitle}>
-                        Zona optimal 0.80 - 1.30 (hijau) · Batas bahaya &gt;
-                        1.50 (merah)
+                        Zona optimal 0.80 - 1.30 · Batas bahaya &gt; 1.50
                     </Text>
                 </View>
                 <View style={styles.legendRow}>
@@ -381,19 +527,19 @@ function RpeAcwrChart({
                         <View
                             style={[
                                 styles.legendDot,
-                                { backgroundColor: '#2563eb' },
+                                { backgroundColor: '#0d9488' },
                             ]}
                         />
-                        <Text style={styles.legendText}>Acute (AU)</Text>
+                        <Text style={styles.legendText}>Chronic</Text>
                     </View>
                     <View style={styles.legendItem}>
                         <View
                             style={[
                                 styles.legendDot,
-                                { backgroundColor: '#0d9488' },
+                                { backgroundColor: '#132e57' },
                             ]}
                         />
-                        <Text style={styles.legendText}>Chronic 4W</Text>
+                        <Text style={styles.legendText}>Acute</Text>
                     </View>
                     <View style={styles.legendItem}>
                         <View
@@ -412,77 +558,23 @@ function RpeAcwrChart({
                             ]}
                         />
                         <Text style={[styles.legendText, { color: '#e11d48' }]}>
-                            Batas 1.50
+                            &gt; 1.50
                         </Text>
                     </View>
                 </View>
             </View>
 
-            <Svg
-                width={width}
-                height={height}
-                viewBox={`0 0 ${width} ${height}`}
-            >
-                {/* Background Sweet Spot Area */}
+            <Svg width={width - 12} height={height - 30}>
+                {/* Sweet Spot Shaded Area */}
                 <Rect
                     x={plotLeft}
                     y={ySweetTop}
                     width={plotWidth}
                     height={ySweetBottom - ySweetTop}
                     fill="#10b981"
-                    fillOpacity={0.08}
+                    fillOpacity={0.09}
                 />
-
-                {/* Horizontal Grid lines & AU / ACWR axis labels */}
-                {auTicks.map((tickVal, idx) => {
-                    const y = plotBottom - (tickVal / maxAu) * plotHeight;
-                    const acwrVal = acwrTicks[idx];
-                    const labelAu =
-                        tickVal >= 1000
-                            ? `${(tickVal / 1000).toFixed(tickVal % 1000 === 0 ? 0 : 1)}k`
-                            : `${tickVal}`;
-                    const labelAcwr = acwrVal.toFixed(
-                        acwrVal % 1 === 0 ? 0 : 1,
-                    );
-
-                    return (
-                        <G key={`grid-${idx}`}>
-                            <Line
-                                x1={plotLeft}
-                                y1={y}
-                                x2={plotRight}
-                                y2={y}
-                                stroke="#e2e8f0"
-                                strokeDasharray="2 2"
-                                strokeWidth={0.5}
-                            />
-                            <Text
-                                x={plotLeft - 6}
-                                y={y + 2.5}
-                                style={{
-                                    fontSize: 6.5,
-                                    fill: '#64748b',
-                                    textAnchor: 'end',
-                                }}
-                            >
-                                {labelAu}
-                            </Text>
-                            <Text
-                                x={plotRight + 6}
-                                y={y + 2.5}
-                                style={{
-                                    fontSize: 6.5,
-                                    fill: '#64748b',
-                                    textAnchor: 'start',
-                                }}
-                            >
-                                {labelAcwr}
-                            </Text>
-                        </G>
-                    );
-                })}
-
-                {/* Reference Dashed Lines */}
+                {/* Danger 1.5 Line */}
                 <Line
                     x1={plotLeft}
                     y1={yDanger}
@@ -490,37 +582,67 @@ function RpeAcwrChart({
                     y2={yDanger}
                     stroke="#f43f5e"
                     strokeDasharray="4 3"
-                    strokeWidth={0.8}
+                    strokeWidth={0.75}
                 />
-                <Line
-                    x1={plotLeft}
-                    y1={yOptHigh}
-                    x2={plotRight}
-                    y2={yOptHigh}
-                    stroke="#10b981"
-                    strokeDasharray="2 3"
-                    strokeWidth={0.6}
-                />
-                <Line
-                    x1={plotLeft}
-                    y1={yOptLow}
-                    x2={plotRight}
-                    y2={yOptLow}
-                    stroke="#0284c7"
-                    strokeDasharray="2 3"
-                    strokeWidth={0.6}
-                />
+                {/* Grid & Right ACWR Ticks */}
+                {acwrTicks.map((tick) => {
+                    const y = plotBottom - (tick / maxAcwr) * plotHeight;
+                    return (
+                        <G key={`acwr-grid-${tick}`}>
+                            <Line
+                                x1={plotLeft}
+                                y1={y}
+                                x2={plotRight}
+                                y2={y}
+                                stroke="#f1f5f9"
+                                strokeWidth={0.5}
+                            />
+                            <Text
+                                x={plotRight + 2.5}
+                                y={y + 2}
+                                style={styles.chartAxisTick}
+                            >
+                                {tick.toFixed(tick % 1 === 0 ? 0 : 1)}
+                            </Text>
+                        </G>
+                    );
+                })}
+                {/* Left AU Ticks */}
+                {auTicks.map((tick) => {
+                    const y = plotBottom - (tick / maxAu) * plotHeight;
+                    return (
+                        <Text
+                            key={`au-tick-${tick}`}
+                            x={plotLeft - 3.5}
+                            y={y + 2}
+                            style={[
+                                styles.chartAxisTick,
+                                { textAnchor: 'end' },
+                            ]}
+                        >
+                            {tick >= 1000
+                                ? `${(tick / 1000).toFixed(0)}k`
+                                : String(tick)}
+                        </Text>
+                    );
+                })}
 
-                {/* Acute Load Bars */}
+                {/* Stacked Bars: Chronic Load (Bottom, Teal) + Acute Load (Top, Navy) */}
                 {data.map((d, i) => {
                     const cx = plotLeft + (i + 0.5) * stepWidth;
-                    const bh = Math.max(0, (d.acute_load / maxAu) * plotHeight);
-                    const by = plotBottom - bh;
                     const bx = cx - barWidth / 2;
 
-                    const chronicY =
-                        plotBottom - (d.chronic_load / maxAu) * plotHeight;
-                    chronicPoints.push({ cx, cy: chronicY });
+                    const chronicH = Math.max(
+                        0,
+                        (d.chronic_load / maxAu) * plotHeight,
+                    );
+                    const chronicY = plotBottom - chronicH;
+
+                    const acuteH = Math.max(
+                        0,
+                        (d.acute_load / maxAu) * plotHeight,
+                    );
+                    const acuteY = chronicY - acuteH;
 
                     if (d.acwr !== null && d.acwr > 0) {
                         const acwrY =
@@ -530,24 +652,38 @@ function RpeAcwrChart({
 
                     return (
                         <G key={`bar-${i}`}>
-                            <Rect
-                                x={bx}
-                                y={by}
-                                width={barWidth}
-                                height={bh}
-                                fill="#2563eb"
-                                rx={2}
-                            />
-                            {stepWidth >= 16 && d.acute_load > 0 && (
+                            {/* Chronic Segment (Bottom) */}
+                            {chronicH > 0 && (
+                                <Rect
+                                    x={bx}
+                                    y={chronicY}
+                                    width={barWidth}
+                                    height={chronicH}
+                                    fill="#0d9488"
+                                    rx={1.5}
+                                />
+                            )}
+                            {/* Acute Segment (Top) */}
+                            {acuteH > 0 && (
+                                <Rect
+                                    x={bx}
+                                    y={acuteY}
+                                    width={barWidth}
+                                    height={acuteH}
+                                    fill="#132e57"
+                                    rx={1.5}
+                                />
+                            )}
+                            {stepWidth >= 13 && d.acute_load > 0 && (
                                 <G
-                                    transform={`rotate(-90 ${cx - 3} ${by - 4})`}
+                                    transform={`rotate(-90 ${cx - 2} ${acuteY - 3})`}
                                 >
                                     <Text
-                                        x={cx - 3}
-                                        y={by - 4}
+                                        x={cx - 2}
+                                        y={acuteY - 3}
                                         style={{
-                                            fontSize: 5.5,
-                                            fill: '#1d4ed8',
+                                            fontSize: 4.8,
+                                            fill: '#132e57',
                                             fontWeight: 'bold',
                                         }}
                                     >
@@ -556,15 +692,15 @@ function RpeAcwrChart({
                                 </G>
                             )}
                             <G
-                                transform={`rotate(-90 ${cx} ${plotBottom + 6})`}
+                                transform={`rotate(-90 ${cx} ${plotBottom + 26})`}
                             >
                                 <Text
                                     x={cx}
-                                    y={plotBottom + 6}
+                                    y={plotBottom + 26}
                                     style={{
-                                        fontSize: 6,
-                                        fill: '#475569',
-                                        textAnchor: 'end',
+                                        fontSize: 5.2,
+                                        fill: '#64748b',
+                                        textAnchor: 'start',
                                     }}
                                 >
                                     {d.week_label}
@@ -574,57 +710,36 @@ function RpeAcwrChart({
                     );
                 })}
 
-                {/* Chronic Load Line (Teal) */}
-                {chronicPoints.length > 1 && (
-                    <Polyline
-                        points={chronicPoints
-                            .map((p) => `${p.cx},${p.cy}`)
-                            .join(' ')}
-                        stroke="#0d9488"
-                        strokeWidth={1.8}
-                        fill="none"
-                    />
-                )}
-                {chronicPoints.map((p, i) => (
-                    <Circle
-                        key={`chr-pt-${i}`}
-                        cx={p.cx}
-                        cy={p.cy}
-                        r={2.2}
-                        fill="#0d9488"
-                    />
-                ))}
-
-                {/* ACWR Line (Amber/Orange) */}
+                {/* ACWR Line (Orange) */}
                 {acwrPoints.length > 1 && (
                     <Polyline
                         points={acwrPoints
                             .map((p) => `${p.cx},${p.cy}`)
                             .join(' ')}
                         stroke="#ea580c"
-                        strokeWidth={2}
+                        strokeWidth={1.8}
                         fill="none"
                     />
                 )}
                 {acwrPoints.map((p, i) => (
-                    <G key={`acwr-pt-${i}`}>
+                    <G key={`acwr-${i}`}>
                         <Circle
                             cx={p.cx}
                             cy={p.cy}
-                            r={3}
+                            r={2.4}
                             fill="#ffffff"
                             stroke="#ea580c"
-                            strokeWidth={1.5}
+                            strokeWidth={1.2}
                         />
-                        {stepWidth >= 16 && (
+                        {stepWidth >= 13 && (
                             <G
-                                transform={`rotate(-90 ${p.cx + 5} ${p.cy - 4})`}
+                                transform={`rotate(-90 ${p.cx + 3.5} ${p.cy - 3})`}
                             >
                                 <Text
-                                    x={p.cx + 5}
-                                    y={p.cy - 4}
+                                    x={p.cx + 3.5}
+                                    y={p.cy - 3}
                                     style={{
-                                        fontSize: 6,
+                                        fontSize: 5.2,
                                         fill: '#ea580c',
                                         fontWeight: 'bold',
                                     }}
@@ -640,25 +755,387 @@ function RpeAcwrChart({
     );
 }
 
+/**
+ * 3. Grafik Tren Area ACWR Mingguan (Sweet Spot) (Kiri Bawah)
+ * Area hijau 0.80 - 1.30, garis batas 1.50, dan kurva area biru
+ */
+function AcwrSweetSpotChart({
+    summaries,
+}: {
+    summaries: RpeWeeklyReportData['weekly_summaries'];
+}) {
+    if (summaries.length === 0) {
+        return (
+            <View style={[styles.chartCard, { width: 263, height: 156 }]}>
+                <Text style={styles.chartEmpty}>Belum ada riwayat ACWR.</Text>
+            </View>
+        );
+    }
+
+    const data = [...summaries].reverse();
+    const width = 263;
+    const height = 156;
+    const marginLeft = 22;
+    const marginRight = 14;
+    const marginTop = 10;
+    const plotHeight = 82;
+    const plotBottom = marginTop + plotHeight; // 92
+    const plotWidth = width - marginLeft - marginRight;
+    const plotLeft = marginLeft;
+    const plotRight = marginLeft + plotWidth;
+
+    const maxAcwr = 2.0;
+    const ticks = [0, 0.5, 1.0, 1.5, 2.0];
+
+    const ySweetTop = plotBottom - (1.3 / maxAcwr) * plotHeight;
+    const ySweetBottom = plotBottom - (0.8 / maxAcwr) * plotHeight;
+    const yDanger = plotBottom - (1.5 / maxAcwr) * plotHeight;
+
+    const N = data.length;
+    const stepWidth = N > 0 ? plotWidth / N : plotWidth;
+
+    const points: { cx: number; cy: number; val: number }[] = [];
+    data.forEach((d, i) => {
+        if (d.acwr !== null && d.acwr > 0) {
+            const cx = plotLeft + (i + 0.5) * stepWidth;
+            const cy =
+                plotBottom - (Math.min(maxAcwr, d.acwr) / maxAcwr) * plotHeight;
+            points.push({ cx, cy, val: d.acwr });
+        }
+    });
+
+    return (
+        <View
+            wrap={false}
+            style={[styles.chartCard, { width: 263, height: 156 }]}
+        >
+            <View style={styles.chartHeader}>
+                <View>
+                    <Text style={styles.chartTitle}>
+                        TREN AREA ACWR (SWEET SPOT)
+                    </Text>
+                    <Text style={styles.chartSubtitle}>
+                        Zona aman 0.80 - 1.30 (hijau)
+                    </Text>
+                </View>
+                <View style={styles.legendRow}>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#10b981' },
+                            ]}
+                        />
+                        <Text style={styles.legendText}>Sweet Spot</Text>
+                    </View>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#f43f5e' },
+                            ]}
+                        />
+                        <Text style={[styles.legendText, { color: '#e11d48' }]}>
+                            Batas 1.50
+                        </Text>
+                    </View>
+                </View>
+            </View>
+
+            <Svg width={width - 12} height={height - 30}>
+                {/* Sweet Spot Shaded Zone */}
+                <Rect
+                    x={plotLeft}
+                    y={ySweetTop}
+                    width={plotWidth}
+                    height={ySweetBottom - ySweetTop}
+                    fill="#10b981"
+                    fillOpacity={0.09}
+                />
+                {/* Danger 1.5 line */}
+                <Line
+                    x1={plotLeft}
+                    y1={yDanger}
+                    x2={plotRight}
+                    y2={yDanger}
+                    stroke="#f43f5e"
+                    strokeDasharray="3 3"
+                    strokeWidth={0.75}
+                />
+                {/* Y-axis Ticks & Grid */}
+                {ticks.map((t) => {
+                    const y = plotBottom - (t / maxAcwr) * plotHeight;
+                    return (
+                        <G key={`sweet-grid-${t}`}>
+                            <Line
+                                x1={plotLeft}
+                                y1={y}
+                                x2={plotRight}
+                                y2={y}
+                                stroke="#f1f5f9"
+                                strokeWidth={0.5}
+                            />
+                            <Text
+                                x={plotLeft - 3.5}
+                                y={y + 2}
+                                style={[
+                                    styles.chartAxisTick,
+                                    { textAnchor: 'end' },
+                                ]}
+                            >
+                                {t.toFixed(t % 1 === 0 ? 0 : 1)}
+                            </Text>
+                        </G>
+                    );
+                })}
+
+                {/* Area Fill under ACWR Line */}
+                {points.length > 1 && (
+                    <Polyline
+                        points={[
+                            `${points[0].cx},${plotBottom}`,
+                            ...points.map((p) => `${p.cx},${p.cy}`),
+                            `${points[points.length - 1].cx},${plotBottom}`,
+                        ].join(' ')}
+                        fill="#1d4ed8"
+                        fillOpacity={0.08}
+                        stroke="none"
+                    />
+                )}
+                {/* ACWR Blue Polyline */}
+                {points.length > 1 && (
+                    <Polyline
+                        points={points.map((p) => `${p.cx},${p.cy}`).join(' ')}
+                        stroke="#1d4ed8"
+                        strokeWidth={1.8}
+                        fill="none"
+                    />
+                )}
+                {/* Points & Labels */}
+                {points.map((p, i) => (
+                    <G key={`spt-${i}`}>
+                        <Circle
+                            cx={p.cx}
+                            cy={p.cy}
+                            r={2.4}
+                            fill="#ffffff"
+                            stroke="#1d4ed8"
+                            strokeWidth={1.2}
+                        />
+                        {stepWidth >= 13 && (
+                            <G
+                                transform={`rotate(-90 ${p.cx + 3.5} ${p.cy - 3})`}
+                            >
+                                <Text
+                                    x={p.cx + 3.5}
+                                    y={p.cy - 3}
+                                    style={{
+                                        fontSize: 5.2,
+                                        fill: '#1d4ed8',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    {p.val.toFixed(2)}
+                                </Text>
+                            </G>
+                        )}
+                    </G>
+                ))}
+                {/* X-axis week labels */}
+                {data.map((d, i) => {
+                    const cx = plotLeft + (i + 0.5) * stepWidth;
+                    return (
+                        <G
+                            key={`sx-${i}`}
+                            transform={`rotate(-90 ${cx} ${plotBottom + 26})`}
+                        >
+                            <Text
+                                x={cx}
+                                y={plotBottom + 26}
+                                style={{
+                                    fontSize: 5.2,
+                                    fill: '#64748b',
+                                    textAnchor: 'start',
+                                }}
+                            >
+                                {d.week_label}
+                            </Text>
+                        </G>
+                    );
+                })}
+            </Svg>
+        </View>
+    );
+}
+
+function DailyLoadChart({
+    dailyLoads,
+}: {
+    dailyLoads?: RpeWeeklyReportData['daily_loads'];
+}) {
+    const data = dailyLoads ?? [];
+    if (data.length === 0) {
+        return (
+            <View style={[styles.chartCard, { width: 264, height: 156 }]}>
+                <Text style={styles.chartEmpty}>
+                    Belum ada data sesi latihan harian.
+                </Text>
+            </View>
+        );
+    }
+
+    const width = 264;
+    const height = 156;
+    const marginLeft = 26;
+    const marginRight = 14;
+    const marginTop = 10;
+    const plotHeight = 82;
+    const plotBottom = marginTop + plotHeight; // 92
+    const plotWidth = width - marginLeft - marginRight;
+    const plotLeft = marginLeft;
+    const plotRight = marginLeft + plotWidth;
+
+    const maxLoad = Math.max(1200, ...data.map((d) => d.daily_load || 0));
+    const maxScale = Math.ceil(maxLoad / 300) * 300;
+    const ticks = [
+        0,
+        maxScale * 0.25,
+        maxScale * 0.5,
+        maxScale * 0.75,
+        maxScale,
+    ];
+
+    const N = data.length;
+    const stepWidth = N > 0 ? plotWidth / N : plotWidth;
+    const barWidth = Math.min(10, Math.max(5, stepWidth * 0.62));
+
+    return (
+        <View
+            wrap={false}
+            style={[styles.chartCard, { width: 264, height: 156 }]}
+        >
+            <View style={styles.chartHeader}>
+                <View>
+                    <Text style={styles.chartTitle}>
+                        DISTRIBUSI BEBAN HARIAN
+                    </Text>
+                    <Text style={styles.chartSubtitle}>
+                        14 hari terakhir (AU)
+                    </Text>
+                </View>
+                <View style={styles.legendRow}>
+                    <View style={styles.legendItem}>
+                        <View
+                            style={[
+                                styles.legendDot,
+                                { backgroundColor: '#132e57' },
+                            ]}
+                        />
+                        <Text style={styles.legendText}>Beban Harian</Text>
+                    </View>
+                </View>
+            </View>
+
+            <Svg width={width - 12} height={height - 30}>
+                {/* Y-axis Ticks & Grid */}
+                {ticks.map((t) => {
+                    const y = plotBottom - (t / maxScale) * plotHeight;
+                    return (
+                        <G key={`dl-tick-${t}`}>
+                            <Line
+                                x1={plotLeft}
+                                y1={y}
+                                x2={plotRight}
+                                y2={y}
+                                stroke="#f1f5f9"
+                                strokeWidth={0.5}
+                            />
+                            <Text
+                                x={plotLeft - 3.5}
+                                y={y + 2}
+                                style={[
+                                    styles.chartAxisTick,
+                                    { textAnchor: 'end' },
+                                ]}
+                            >
+                                {t >= 1000
+                                    ? `${(t / 1000).toFixed(1)}k`
+                                    : String(Math.round(t))}
+                            </Text>
+                        </G>
+                    );
+                })}
+
+                {/* Daily Load Bars */}
+                {data.map((d, i) => {
+                    const cx = plotLeft + (i + 0.5) * stepWidth;
+                    const bh = Math.max(
+                        0,
+                        (d.daily_load / maxScale) * plotHeight,
+                    );
+                    const by = plotBottom - bh;
+                    const bx = cx - barWidth / 2;
+
+                    return (
+                        <G key={`dbar-${i}`}>
+                            <Rect
+                                x={bx}
+                                y={by}
+                                width={barWidth}
+                                height={bh}
+                                fill="#132e57"
+                                rx={1.5}
+                            />
+                            {d.daily_load > 0 && (
+                                <G
+                                    transform={`rotate(-90 ${cx - 1.8} ${by - 3})`}
+                                >
+                                    <Text
+                                        x={cx - 1.8}
+                                        y={by - 3}
+                                        style={{
+                                            fontSize: 4.8,
+                                            fill: '#132e57',
+                                            fontWeight: 'bold',
+                                        }}
+                                    >
+                                        {d.daily_load.toLocaleString('id-ID')}
+                                    </Text>
+                                </G>
+                            )}
+                            <G
+                                transform={`rotate(-90 ${cx} ${plotBottom + 26})`}
+                            >
+                                <Text
+                                    x={cx}
+                                    y={plotBottom + 26}
+                                    style={{
+                                        fontSize: 5,
+                                        fill: '#64748b',
+                                        textAnchor: 'start',
+                                    }}
+                                >
+                                    {d.date_label}
+                                </Text>
+                            </G>
+                        </G>
+                    );
+                })}
+            </Svg>
+        </View>
+    );
+}
+
 export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
     const {
         athlete,
         latest_week,
         insights,
         weekly_summaries,
+        daily_loads,
         recent_sessions,
         generated_at,
     } = data;
-
-    const latestAcwr = latest_week?.acwr ?? null;
-    const latestZoneBorderColor =
-        latest_week?.zone === 'optimal'
-            ? '#059669'
-            : latest_week?.zone === 'caution'
-              ? '#d97706'
-              : latest_week?.zone === 'high_risk'
-                ? '#e11d48'
-                : '#132e57';
 
     return (
         <Document
@@ -666,8 +1143,11 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
             author="Phynestra Sports Science"
             subject="Monitoring Beban Latihan dan ACWR Mingguan"
         >
+            {/* ============================================================ */}
+            {/* HALAMAN 1: EXECUTIVE VISUAL DASHBOARD                        */}
+            {/* ============================================================ */}
             <Page size="A4" style={styles.page}>
-                {/* Header */}
+                {/* Header Dokumen */}
                 <View style={styles.header}>
                     <View>
                         <Text style={styles.brandKicker}>
@@ -688,131 +1168,47 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                     </View>
                 </View>
 
-                {/* Athlete Metadata Profile */}
-                <View style={styles.metaTable}>
-                    <View style={styles.metaRow}>
-                        <Text style={styles.metaCellLabel}>Nama Atlet</Text>
-                        <Text style={styles.metaCellValue}>{athlete.name}</Text>
-                        <Text style={styles.metaCellLabel}>
-                            Cabang / Posisi
-                        </Text>
-                        <Text
-                            style={[
-                                styles.metaCellValue,
-                                { borderRightWidth: 0 },
-                            ]}
-                        >
+                {/* Profil Atlet Modern (Minimalis, Bebas Kerangka Kotak Tebal) */}
+                <View style={styles.metaCard}>
+                    <View style={styles.metaCol}>
+                        <Text style={styles.metaLabel}>NAMA ATLET</Text>
+                        <Text style={styles.metaVal}>{athlete.name}</Text>
+                    </View>
+                    <View style={styles.metaCol}>
+                        <Text style={styles.metaLabel}>CABANG / POSISI</Text>
+                        <Text style={styles.metaVal}>
                             {athlete.sport_branch}
                             {athlete.position ? ` · ${athlete.position}` : ''}
                         </Text>
                     </View>
-                    <View style={[styles.metaRow, { borderBottomWidth: 0 }]}>
-                        <Text style={styles.metaCellLabel}>
-                            Total Sesi Latihan
-                        </Text>
-                        <Text style={styles.metaCellValue}>
+                    <View style={styles.metaCol}>
+                        <Text style={styles.metaLabel}>TOTAL SESI</Text>
+                        <Text style={styles.metaVal}>
                             {athlete.total_sessions} sesi tercatat
                         </Text>
-                        <Text style={styles.metaCellLabel}>Rentang Sesi</Text>
-                        <Text
-                            style={[
-                                styles.metaCellValue,
-                                { borderRightWidth: 0 },
-                            ]}
-                        >
+                    </View>
+                    <View style={styles.metaCol}>
+                        <Text style={styles.metaLabel}>RENTANG WAKTU</Text>
+                        <Text style={styles.metaVal}>
                             {data.period.start_date ?? '-'} s.d.{' '}
                             {data.period.end_date ?? '-'}
                         </Text>
                     </View>
                 </View>
 
-                {/* Summary KPI Cards for Latest Week */}
-                <View style={styles.summaryRow}>
-                    <View
-                        style={[
-                            styles.summaryCard,
-                            { borderTopColor: latestZoneBorderColor },
-                        ]}
-                    >
-                        <Text style={styles.summaryLabel}>
-                            Rasio ACWR{' '}
-                            {latest_week ? `(${latest_week.week_label})` : ''}
-                        </Text>
-                        <Text style={styles.summaryValue}>
-                            {latestAcwr !== null ? (
-                                <>
-                                    {latestAcwr.toFixed(2)}{' '}
-                                    <Text style={styles.summaryUnit}>
-                                        ({latest_week?.zone_label})
-                                    </Text>
-                                </>
-                            ) : (
-                                '-'
-                            )}
-                        </Text>
-                    </View>
-
-                    <View style={styles.summaryCard}>
-                        <Text style={styles.summaryLabel}>Acute Load (1W)</Text>
-                        <Text style={styles.summaryValue}>
-                            {latest_week ? (
-                                <>
-                                    {latest_week.acute_load.toLocaleString(
-                                        'id-ID',
-                                    )}{' '}
-                                    <Text style={styles.summaryUnit}>AU</Text>
-                                </>
-                            ) : (
-                                '-'
-                            )}
-                        </Text>
-                    </View>
-
-                    <View style={styles.summaryCard}>
-                        <Text style={styles.summaryLabel}>
-                            Chronic Load (4W)
-                        </Text>
-                        <Text style={styles.summaryValue}>
-                            {latest_week ? (
-                                <>
-                                    {Math.round(
-                                        latest_week.chronic_load,
-                                    ).toLocaleString('id-ID')}{' '}
-                                    <Text style={styles.summaryUnit}>AU</Text>
-                                </>
-                            ) : (
-                                '-'
-                            )}
-                        </Text>
-                    </View>
-
-                    <View style={styles.summaryCard}>
-                        <Text style={styles.summaryLabel}>
-                            Monotony / Strain
-                        </Text>
-                        <Text style={styles.summaryValue}>
-                            {latest_week ? (
-                                <>
-                                    {latest_week.monotony.toFixed(2)}{' '}
-                                    <Text style={styles.summaryUnit}>
-                                        /{' '}
-                                        {Math.round(
-                                            latest_week.strain,
-                                        ).toLocaleString('id-ID')}{' '}
-                                        AU
-                                    </Text>
-                                </>
-                            ) : (
-                                '-'
-                            )}
-                        </Text>
-                    </View>
+                {/* Baris Visual 1: Donut Gauge ACWR (Kiri) + Tren Acute vs Chronic & ACWR (Kanan) */}
+                <View style={styles.gridRow}>
+                    <AcwrDonutGauge latestWeek={latest_week} />
+                    <RpeAcwrChart summaries={weekly_summaries} />
                 </View>
 
-                {/* Workload Progression Vector Chart */}
-                <RpeAcwrChart summaries={weekly_summaries} />
+                {/* Baris Visual 2: Tren Area ACWR Sweet Spot (Kiri) + Distribusi Beban Harian 14 Hari (Kanan) */}
+                <View style={styles.gridRow}>
+                    <AcwrSweetSpotChart summaries={weekly_summaries} />
+                    <DailyLoadChart dailyLoads={daily_loads} />
+                </View>
 
-                {/* Automated Workload Insights */}
+                {/* Automated Workload Insights (Elegan, Aksen Garis Kiri, Tanpa Kotak Tebal) */}
                 {insights.length > 0 && (
                     <View wrap={false}>
                         <Text style={styles.sectionTitle}>
@@ -825,7 +1221,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                     style={[
                                         styles.insightCard,
                                         {
-                                            borderTopColor:
+                                            borderLeftColor:
                                                 getInsightBorderColor(
                                                     ins.level,
                                                 ),
@@ -850,7 +1246,46 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                     </View>
                 )}
 
-                {/* Weekly ACWR Recap Table */}
+                {/* Running Footer */}
+                <View style={styles.footer} fixed>
+                    <Text style={styles.footerBrand}>
+                        Phynestra Sports Science — Dokumen resmi monitoring
+                        beban latihan &amp; ACWR atlet
+                    </Text>
+                    <Text
+                        style={styles.footerPage}
+                        render={({ pageNumber, totalPages }) =>
+                            `Halaman ${pageNumber} dari ${totalPages}`
+                        }
+                    />
+                </View>
+            </Page>
+
+            {/* ============================================================ */}
+            {/* HALAMAN 2: TABEL DATA HISTORIS LENGKAP                       */}
+            {/* ============================================================ */}
+            <Page size="A4" style={styles.page}>
+                {/* Running Header Halaman 2 */}
+                <View style={styles.header}>
+                    <View>
+                        <Text style={styles.brandKicker}>
+                            PHYNESTRA SPORTS SCIENCE
+                        </Text>
+                        <Text style={styles.headerTitle}>
+                            TABEL HISTORIS REKAP ACWR &amp; SESI LATIHAN
+                        </Text>
+                        <Text style={styles.headerSub}>
+                            {athlete.name} · {athlete.sport_branch}
+                        </Text>
+                    </View>
+                    <View style={styles.headerRight}>
+                        <Text style={styles.headerDate}>
+                            Dicetak: {generated_at}
+                        </Text>
+                    </View>
+                </View>
+
+                {/* Tabel Rekap ACWR Mingguan (Per 7 Hari) */}
                 <Text style={styles.sectionTitle}>
                     REKAP ACWR MINGGUAN (PER 7 HARI)
                 </Text>
@@ -862,7 +1297,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             Minggu
                         </Text>
                         <Text
-                            style={[styles.tableHeaderCell, { width: '19%' }]}
+                            style={[styles.tableHeaderCell, { width: '22%' }]}
                         >
                             Rentang Tanggal
                         </Text>
@@ -870,7 +1305,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '6%' },
+                                { width: '7%' },
                             ]}
                         >
                             Sesi
@@ -879,7 +1314,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '11%' },
+                                { width: '12%' },
                             ]}
                         >
                             Acute (AU)
@@ -888,7 +1323,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '12%' },
+                                { width: '13%' },
                             ]}
                         >
                             Chronic (AU)
@@ -897,7 +1332,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '8%' },
+                                { width: '9%' },
                             ]}
                         >
                             ACWR
@@ -906,7 +1341,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '9%' },
+                                { width: '13%' },
                             ]}
                         >
                             Perubahan %
@@ -915,7 +1350,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '8%' },
+                                { width: '13%' },
                             ]}
                         >
                             Monotony
@@ -924,7 +1359,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                             style={[
                                 styles.tableHeaderCell,
                                 styles.tableCellNum,
-                                { width: '8%' },
+                                { width: '13%' },
                             ]}
                         >
                             Strain
@@ -932,159 +1367,134 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                         <Text
                             style={[
                                 styles.tableHeaderCell,
-                                { width: '8%', textAlign: 'center' },
+                                { width: '11%', textAlign: 'center' },
                             ]}
                         >
                             Zona
                         </Text>
                     </View>
 
-                    {weekly_summaries.length === 0 ? (
-                        <View
-                            style={[
-                                styles.tableRow,
-                                {
-                                    justifyContent: 'center',
-                                    paddingVertical: 12,
-                                },
-                            ]}
-                        >
-                            <Text style={{ color: '#64748b', fontSize: 7.5 }}>
-                                Belum ada data beban mingguan.
-                            </Text>
-                        </View>
-                    ) : (
-                        weekly_summaries.map((w, idx) => {
-                            const isAlt = idx % 2 === 1;
-                            const zoneStyle = getZoneStyle(w.zone);
-
-                            return (
-                                <View
-                                    key={idx}
-                                    wrap={false}
+                    {weekly_summaries.map((w, idx) => {
+                        const isAlt = idx % 2 === 1;
+                        return (
+                            <View
+                                key={idx}
+                                style={[
+                                    styles.tableRow,
+                                    isAlt ? styles.tableRowAlt : {},
+                                ]}
+                            >
+                                <Text
                                     style={[
-                                        styles.tableRow,
-                                        isAlt ? styles.tableRowAlt : {},
+                                        styles.tableCell,
+                                        { width: '11%', fontWeight: 'bold' },
                                     ]}
                                 >
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            { width: '11%' },
-                                        ]}
-                                    >
-                                        {w.week_label}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            { width: '19%' },
-                                        ]}
-                                    >
-                                        {w.week_range}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '6%' },
-                                        ]}
-                                    >
-                                        {w.session_count}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '11%' },
-                                        ]}
-                                    >
-                                        {w.acute_load.toLocaleString('id-ID')}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '12%' },
-                                        ]}
-                                    >
-                                        {Math.round(
-                                            w.chronic_load,
-                                        ).toLocaleString('id-ID')}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '8%' },
-                                        ]}
-                                    >
-                                        {w.acwr !== null
-                                            ? w.acwr.toFixed(2)
-                                            : '-'}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '9%' },
-                                        ]}
-                                    >
-                                        {w.week_change_pct !== null
-                                            ? `${w.week_change_pct > 0 ? '+' : ''}${w.week_change_pct.toFixed(1)}%`
-                                            : '-'}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '8%' },
-                                        ]}
-                                    >
-                                        {w.monotony.toFixed(2)}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            styles.tableCellNum,
-                                            { width: '8%' },
-                                        ]}
-                                    >
-                                        {Math.round(w.strain).toLocaleString(
-                                            'id-ID',
-                                        )}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.tableCell,
-                                            zoneStyle,
-                                            {
-                                                width: '8%',
-                                                textAlign: 'center',
-                                                fontSize: 6.8,
-                                            },
-                                        ]}
-                                    >
-                                        {w.zone_label}
-                                    </Text>
-                                </View>
-                            );
-                        })
-                    )}
+                                    {w.week_label}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        { width: '22%', color: '#475569' },
+                                    ]}
+                                >
+                                    {w.week_range}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '7%' },
+                                    ]}
+                                >
+                                    {w.session_count}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '12%', fontWeight: 'bold' },
+                                    ]}
+                                >
+                                    {w.acute_load.toLocaleString('id-ID')}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '13%' },
+                                    ]}
+                                >
+                                    {Math.round(w.chronic_load).toLocaleString(
+                                        'id-ID',
+                                    )}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '9%', fontWeight: 'bold' },
+                                    ]}
+                                >
+                                    {w.acwr !== null ? w.acwr.toFixed(2) : '-'}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '13%' },
+                                    ]}
+                                >
+                                    {w.week_change_pct !== null
+                                        ? `${w.week_change_pct > 0 ? '+' : ''}${w.week_change_pct.toFixed(1)}%`
+                                        : '-'}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '13%' },
+                                    ]}
+                                >
+                                    {w.monotony.toFixed(2)}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        styles.tableCellNum,
+                                        { width: '13%' },
+                                    ]}
+                                >
+                                    {Math.round(w.strain).toLocaleString(
+                                        'id-ID',
+                                    )}
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.tableCell,
+                                        getZoneStyle(w.zone),
+                                        { width: '11%', textAlign: 'center' },
+                                    ]}
+                                >
+                                    {w.zone_label}
+                                </Text>
+                            </View>
+                        );
+                    })}
                 </View>
 
-                {/* Recent Sessions Table */}
+                {/* Tabel Riwayat Sesi RPE Terbaru */}
                 {recent_sessions.length > 0 && (
-                    <View wrap={false} style={{ marginTop: 10 }}>
+                    <View wrap={false}>
                         <Text style={styles.sectionTitle}>
-                            RIWAYAT SESI RPE TERBARU (MAKS. 20 SESI)
+                            RIWAYAT SESI LATIHAN TERBARU (MAKS. 20 SESI)
                         </Text>
                         <View style={styles.table}>
                             <View style={styles.tableHeaderRow}>
                                 <Text
                                     style={[
                                         styles.tableHeaderCell,
-                                        { width: '14%' },
+                                        { width: '15%' },
                                     ]}
                                 >
                                     Tanggal
@@ -1092,10 +1502,10 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                 <Text
                                     style={[
                                         styles.tableHeaderCell,
-                                        { width: '18%' },
+                                        { width: '20%' },
                                     ]}
                                 >
-                                    Jenis Sesi
+                                    Tipe Sesi
                                 </Text>
                                 <Text
                                     style={[
@@ -1113,7 +1523,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                         { width: '9%' },
                                     ]}
                                 >
-                                    sRPE
+                                    RPE
                                 </Text>
                                 <Text
                                     style={[
@@ -1122,12 +1532,12 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                         { width: '13%' },
                                     ]}
                                 >
-                                    Load (AU)
+                                    Beban (AU)
                                 </Text>
                                 <Text
                                     style={[
                                         styles.tableHeaderCell,
-                                        { width: '35%' },
+                                        { width: '32%' },
                                     ]}
                                 >
                                     Catatan
@@ -1136,11 +1546,9 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
 
                             {recent_sessions.map((s, idx) => {
                                 const isAlt = idx % 2 === 1;
-
                                 return (
                                     <View
                                         key={idx}
-                                        wrap={false}
                                         style={[
                                             styles.tableRow,
                                             isAlt ? styles.tableRowAlt : {},
@@ -1149,7 +1557,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                         <Text
                                             style={[
                                                 styles.tableCell,
-                                                { width: '14%' },
+                                                { width: '15%' },
                                             ]}
                                         >
                                             {s.session_date}
@@ -1157,7 +1565,7 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                         <Text
                                             style={[
                                                 styles.tableCell,
-                                                { width: '18%' },
+                                                { width: '20%' },
                                             ]}
                                         >
                                             {s.session_type_label}
@@ -1184,7 +1592,10 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                             style={[
                                                 styles.tableCell,
                                                 styles.tableCellNum,
-                                                { width: '13%' },
+                                                {
+                                                    width: '13%',
+                                                    fontWeight: 'bold',
+                                                },
                                             ]}
                                         >
                                             {s.session_load.toLocaleString(
@@ -1194,7 +1605,10 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                                         <Text
                                             style={[
                                                 styles.tableCell,
-                                                { width: '35%' },
+                                                {
+                                                    width: '32%',
+                                                    color: '#64748b',
+                                                },
                                             ]}
                                         >
                                             {s.notes ?? '-'}
@@ -1206,11 +1620,11 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
                     </View>
                 )}
 
-                {/* Running Footer on each page */}
+                {/* Running Footer */}
                 <View style={styles.footer} fixed>
                     <Text style={styles.footerBrand}>
                         Phynestra Sports Science — Dokumen resmi monitoring
-                        kondisi fisik atlet
+                        beban latihan &amp; ACWR atlet
                     </Text>
                     <Text
                         style={styles.footerPage}
@@ -1223,3 +1637,5 @@ export function RpeWeeklyPdfDocument({ data }: { data: RpeWeeklyReportData }) {
         </Document>
     );
 }
+
+export const RpeWeeklyPdf = RpeWeeklyPdfDocument;
