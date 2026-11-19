@@ -8,8 +8,8 @@ use App\Http\Requests\Tracking\StoreDailyMetricRequest;
 use App\Http\Requests\Tracking\UpdateTrainingStartDateRequest;
 use App\Models\Athlete;
 use App\Models\DailyMetric;
+use App\Services\Reports\ReactPdfRenderer;
 use App\Services\Tracking\QuickRecoveryCalculator;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +26,7 @@ class TrackingController extends Controller
 {
     public function __construct(
         private readonly QuickRecoveryCalculator $calculator,
+        private readonly ReactPdfRenderer $pdfRenderer,
     ) {}
 
     /**
@@ -455,17 +456,54 @@ class TrackingController extends Controller
                 : null,
         ];
 
-        $pdf = Pdf::loadView('exports.daily_metric_pdf', [
-            'athlete' => $athlete,
-            'metrics' => $chronological->reverse()->values(),
-            'baselineRhr' => $baselineRhr,
+        $metricsData = $chronological->reverse()->values()->map(function (DailyMetric $m): array {
+            $statusCode = match ($m->recovery_status) {
+                RecoveryStatus::Good => 'good',
+                RecoveryStatus::Fair => 'fair',
+                RecoveryStatus::Poor => 'poor',
+                default => 'empty',
+            };
+
+            return [
+                'record_date' => $m->record_date->translatedFormat('d M Y'),
+                'week' => $m->week,
+                'rhr' => $m->rhr > 0 ? (float) $m->rhr : null,
+                'spo2' => $m->spo2 > 0 ? (float) $m->spo2 : null,
+                'vj' => $m->vj > 0 ? (float) $m->vj : null,
+                'weight' => $m->weight > 0 ? (float) $m->weight : null,
+                'vo2_max' => $m->vo2_max > 0 ? (float) $m->vo2_max : null,
+                'peak_power' => $m->peak_power > 0 ? (float) $m->peak_power : null,
+                'quick_recovery_score' => $m->recovery_status !== RecoveryStatus::Empty ? $m->quick_recovery_score : null,
+                'status_label' => $m->recovery_status->shortLabel(),
+                'status_code' => $statusCode,
+            ];
+        })->all();
+
+        $data = [
+            'athlete' => [
+                'name' => $athlete->name,
+                'gender_label' => $athlete->gender->label(),
+                'birth_date' => $athlete->date_of_birth->translatedFormat('d F Y'),
+                'age' => $athlete->age(),
+                'height_cm' => (float) $athlete->height_cm,
+                'weight_kg' => (float) $athlete->weight_kg,
+                'sport_branch' => 'Atlet Phynestra',
+                'position' => null,
+                'baseline_rhr' => $baselineRhr,
+            ],
+            'period' => [
+                'start_date' => $chronological->first()?->record_date->translatedFormat('d M Y'),
+                'end_date' => $chronological->last()?->record_date->translatedFormat('d M Y'),
+                'total_days' => $filledMetrics->count(),
+            ],
             'summary' => $summary,
             'insights' => $insights,
-            'generatedAt' => Carbon::now()->format('d M Y, H:i'),
-        ])->setPaper('a4', 'portrait');
+            'metrics' => $metricsData,
+            'generated_at' => Carbon::now()->translatedFormat('d M Y, H:i'),
+        ];
 
         $filename = 'phynestra-quick-recovery-'.Str::slug($athlete->name).'.pdf';
 
-        return $pdf->download($filename);
+        return $this->pdfRenderer->downloadResponse('quick-recovery', $data, $filename);
     }
 }

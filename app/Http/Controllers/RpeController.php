@@ -9,8 +9,8 @@ use App\Http\Requests\Rpe\StoreTeamRpeSessionRequest;
 use App\Http\Requests\Rpe\UpdateRpeSessionRequest;
 use App\Models\Athlete;
 use App\Models\RpeSession;
+use App\Services\Reports\ReactPdfRenderer;
 use App\Services\Rpe\AcwrCalculator;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\CarbonInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +26,7 @@ class RpeController extends Controller
 {
     public function __construct(
         private readonly AcwrCalculator $calculator,
+        private readonly ReactPdfRenderer $pdfRenderer,
     ) {}
 
     /**
@@ -404,18 +405,35 @@ class RpeController extends Controller
             : null;
         $insights = $this->calculator->generateLoadInsights($weeklyChronological);
 
-        $pdf = Pdf::loadView('exports.rpe_weekly_pdf', [
-            'athlete' => $athlete,
-            'latestWeek' => $latestWeek,
-            'weeklySummaries' => array_reverse($weeklyChronological),
-            'recentSessions' => $sessions->reverse()->take(20)->values(),
-            'totalSessions' => $sessions->count(),
+        $recentSessionsData = $sessions->reverse()->take(20)->values()->map(fn (RpeSession $s): array => [
+            'session_date' => $s->session_date->translatedFormat('d M Y'),
+            'session_type_label' => $s->session_type->label(),
+            'duration_minutes' => $s->duration_minutes,
+            'rpe' => $s->rpe,
+            'session_load' => $s->session_load,
+            'notes' => $s->notes,
+        ])->all();
+
+        $data = [
+            'athlete' => [
+                'name' => $athlete->name,
+                'sport_branch' => 'Atlet Phynestra',
+                'position' => null,
+                'total_sessions' => $sessions->count(),
+            ],
+            'period' => [
+                'start_date' => $sessions->first()?->session_date->translatedFormat('d M Y'),
+                'end_date' => $sessions->last()?->session_date->translatedFormat('d M Y'),
+            ],
+            'latest_week' => $latestWeek,
             'insights' => $insights,
-            'generatedAt' => Carbon::now()->format('d M Y, H:i'),
-        ])->setPaper('a4', 'portrait');
+            'weekly_summaries' => array_reverse($weeklyChronological),
+            'recent_sessions' => $recentSessionsData,
+            'generated_at' => Carbon::now()->translatedFormat('d M Y, H:i'),
+        ];
 
         $filename = 'phynestra-rpe-acwr-'.Str::slug($athlete->name).'.pdf';
 
-        return $pdf->download($filename);
+        return $this->pdfRenderer->downloadResponse('rpe-weekly', $data, $filename);
     }
 }
